@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>validate (SmerfFile)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre><span class="ruby-comment cmt"># File app/models/smerf_file.rb, line 145</span>
+  <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">validate</span>
+    <span class="ruby-comment cmt"># Decode the raw form data and validate all fields present as defined by the</span>
+    <span class="ruby-comment cmt"># setup_fields method which is called from the method below</span>
+    <span class="ruby-identifier">errors</span> = <span class="ruby-identifier">validate_object_fields</span>()
+    <span class="ruby-comment cmt"># Process question groups</span>
+    <span class="ruby-ivar">@group_objects</span> = <span class="ruby-keyword kw">nil</span>
+    <span class="ruby-keyword kw">if</span> (<span class="ruby-operator">!</span><span class="ruby-ivar">@groups</span>.<span class="ruby-identifier">nil?</span> <span class="ruby-keyword kw">and</span> <span class="ruby-operator">!</span><span class="ruby-ivar">@groups</span>.<span class="ruby-identifier">empty?</span>)
+      <span class="ruby-comment cmt"># Process and validate question groups</span>
+      <span class="ruby-ivar">@group_objects</span> = <span class="ruby-constant">Array</span>.<span class="ruby-identifier">new</span>
+      <span class="ruby-identifier">errors</span> <span class="ruby-operator">+=</span> <span class="ruby-identifier">validate_sub_objects</span>(<span class="ruby-constant">SmerfGroup</span>, 
+          <span class="ruby-ivar">@groups</span>, <span class="ruby-ivar">@group_sort_order_field</span>, <span class="ruby-ivar">@group_objects</span>)
+    <span class="ruby-keyword kw">end</span> 
+    <span class="ruby-comment cmt"># Check for errors and raise an exception </span>
+    <span class="ruby-identifier">check_for_errors</span>(<span class="ruby-identifier">errors</span>)
+    
+    <span class="ruby-comment cmt"># Clear data no longer required, this will reduce the amount of data </span>
+    <span class="ruby-comment cmt"># saved to the DB</span>
+    <span class="ruby-identifier">cleanup</span>()
+    <span class="ruby-identifier">remove_instance_variable</span>(<span class="ruby-identifier">:@groups</span>) 
+    <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">clear</span>()
+  <span class="ruby-keyword kw">end</span></pre>
+</body>
+</html>

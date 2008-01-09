@@ -1,0 +1,367 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>Module: SmerfFormsHelper</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <meta http-equiv="Content-Script-Type" content="text/javascript" />
+  <link rel="stylesheet" href=".././rdoc-style.css" type="text/css" media="screen" />
+  <script type="text/javascript">
+  // <![CDATA[
+
+  function popupCode( url ) {
+    window.open(url, "Code", "resizable=yes,scrollbars=yes,toolbar=no,status=no,height=150,width=400")
+  }
+
+  function toggleCode( id ) {
+    if ( document.getElementById )
+      elem = document.getElementById( id );
+    else if ( document.all )
+      elem = eval( "document.all." + id );
+    else
+      return false;
+
+    elemStyle = elem.style;
+    
+    if ( elemStyle.display != "block" ) {
+      elemStyle.display = "block"
+    } else {
+      elemStyle.display = "none"
+    }
+
+    return true;
+  }
+  
+  // Make codeblocks hidden by default
+  document.writeln( "<style type=\"text/css\">div.method-source-code { display: none }</style>" )
+  
+  // ]]>
+  </script>
+
+</head>
+<body>
+
+
+
+    <div id="classHeader">
+        <table class="header-table">
+        <tr class="top-aligned-row">
+          <td><strong>Module</strong></td>
+          <td class="class-name-in-header">SmerfFormsHelper</td>
+        </tr>
+        <tr class="top-aligned-row">
+            <td><strong>In:</strong></td>
+            <td>
+                <a href="../files/app/helpers/smerf_forms_helper_rb.html">
+                app/helpers/smerf_forms_helper.rb
+                </a>
+        <br />
+            </td>
+        </tr>
+
+        </table>
+    </div>
+  <!-- banner header -->
+
+  <div id="bodyContent">
+
+
+
+  <div id="contextContent">
+
+    <div id="description">
+      <p>
+This module contains all the helper methods used by the smerf form views.
+</p>
+
+    </div>
+
+
+   </div>
+
+    <div id="method-list">
+      <h3 class="section-bar">Methods</h3>
+
+      <div class="name-list">
+      <a href="#M000043">get_error_messages</a>&nbsp;&nbsp;
+      <a href="#M000044">get_notice_messages</a>&nbsp;&nbsp;
+      <a href="#M000051">smerf_get_group_questions</a>&nbsp;&nbsp;
+      <a href="#M000050">smerf_get_groups</a>&nbsp;&nbsp;
+      <a href="#M000049">smerf_group_description</a>&nbsp;&nbsp;
+      <a href="#M000048">smerf_group_name</a>&nbsp;&nbsp;
+      <a href="#M000052">smerf_group_question</a>&nbsp;&nbsp;
+      <a href="#M000047">smerf_thank_you</a>&nbsp;&nbsp;
+      <a href="#M000045">smerf_title</a>&nbsp;&nbsp;
+      <a href="#M000046">smerf_welcome</a>&nbsp;&nbsp;
+      </div>
+    </div>
+
+  </div>
+
+
+    <!-- if includes -->
+    <div id="includes">
+      <h3 class="section-bar">Included Modules</h3>
+
+      <div id="includes-list">
+        <span class="include-name"><a href="SmerfSystemHelpers.html">SmerfSystemHelpers</a></span>
+      </div>
+    </div>
+
+    <div id="section">
+
+
+
+
+
+      
+
+
+    <!-- if method_list -->
+    <div id="methods">
+      <h3 class="section-bar">Public Instance methods</h3>
+
+      <div id="method-M000043" class="method-detail">
+        <a name="M000043"></a>
+
+        <div class="method-heading">
+          <a href="SmerfFormsHelper.src/M000043.html" target="Code" class="method-signature"
+            onclick="popupCode('SmerfFormsHelper.src/M000043.html');return false;">
+          <span class="method-name">get_error_messages</span><span class="method-args">(errors)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+This method creates a formatted error message that is then displayed on the
+smerf form page to inform the user of any errors.
+</p>
+<p>
+CSS identifier: <tt>smerfFormError</tt>
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000044" class="method-detail">
+        <a name="M000044"></a>
+
+        <div class="method-heading">
+          <a href="SmerfFormsHelper.src/M000044.html" target="Code" class="method-signature"
+            onclick="popupCode('SmerfFormsHelper.src/M000044.html');return false;">
+          <span class="method-name">get_notice_messages</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+This method creates a formatted notice message that is then displayed on
+the smerf form. The notice message is retrieved from the flash[:notice].
+</p>
+<p>
+CSS identifier: <tt>smerfFormNotice</tt>
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000051" class="method-detail">
+        <a name="M000051"></a>
+
+        <div class="method-heading">
+          <a href="SmerfFormsHelper.src/M000051.html" target="Code" class="method-signature"
+            onclick="popupCode('SmerfFormsHelper.src/M000051.html');return false;">
+          <span class="method-name">smerf_get_group_questions</span><span class="method-args">(group)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+This method retrieves all the questions defined for the group passed in as
+a parameter.
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000050" class="method-detail">
+        <a name="M000050"></a>
+
+        <div class="method-heading">
+          <a href="SmerfFormsHelper.src/M000050.html" target="Code" class="method-signature"
+            onclick="popupCode('SmerfFormsHelper.src/M000050.html');return false;">
+          <span class="method-name">smerf_get_groups</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+This method retrieves all the groups defined in the form.
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000049" class="method-detail">
+        <a name="M000049"></a>
+
+        <div class="method-heading">
+          <a href="SmerfFormsHelper.src/M000049.html" target="Code" class="method-signature"
+            onclick="popupCode('SmerfFormsHelper.src/M000049.html');return false;">
+          <span class="method-name">smerf_group_description</span><span class="method-args">(group)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+This method retrieves and formats the group description of the group passed
+in as a parameter.
+</p>
+<p>
+CSS identifier: <tt>smerfGroup</tt>
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000048" class="method-detail">
+        <a name="M000048"></a>
+
+        <div class="method-heading">
+          <a href="SmerfFormsHelper.src/M000048.html" target="Code" class="method-signature"
+            onclick="popupCode('SmerfFormsHelper.src/M000048.html');return false;">
+          <span class="method-name">smerf_group_name</span><span class="method-args">(group)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+This method retrieves and formats the group name of the group passed in as
+a parameter.
+</p>
+<p>
+CSS identifier: <tt>smerfGroup</tt>
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000052" class="method-detail">
+        <a name="M000052"></a>
+
+        <div class="method-heading">
+          <a href="SmerfFormsHelper.src/M000052.html" target="Code" class="method-signature"
+            onclick="popupCode('SmerfFormsHelper.src/M000052.html');return false;">
+          <span class="method-name">smerf_group_question</span><span class="method-args">(question, level = 1)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+This method formats the question, and any answers and subquestions defined
+for it. The method takes a question object(<a
+href="SmerfQuestion.html">SmerfQuestion</a>) and a level indicator as
+parameters. The level indicator tells us if a question is a subquestion or
+not (level &gt; 1).
+</p>
+<p>
+The question type is checked to see how is should be formatted, currently
+the following formats are supported:
+</p>
+<ul>
+<li>Multiple choice (checkbox)
+
+</li>
+<li>Single choice (radio)
+
+</li>
+<li>Text field (large amount of text)
+
+</li>
+<li>Text box (small amount of text)
+
+</li>
+</ul>
+<p>
+CSS identifiers:
+</p>
+<pre>
+  smerfQuestionHeader
+  smerfQuestion
+  smerfSubquestion
+  smerfQuestionError
+  smerfInstruction
+</pre>
+        </div>
+      </div>
+
+      <div id="method-M000047" class="method-detail">
+        <a name="M000047"></a>
+
+        <div class="method-heading">
+          <a href="SmerfFormsHelper.src/M000047.html" target="Code" class="method-signature"
+            onclick="popupCode('SmerfFormsHelper.src/M000047.html');return false;">
+          <span class="method-name">smerf_thank_you</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+This method retrieves and formats the form thank you message.
+</p>
+<p>
+CSS identifier: <tt>smerfThankyou</tt>
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000045" class="method-detail">
+        <a name="M000045"></a>
+
+        <div class="method-heading">
+          <a href="SmerfFormsHelper.src/M000045.html" target="Code" class="method-signature"
+            onclick="popupCode('SmerfFormsHelper.src/M000045.html');return false;">
+          <span class="method-name">smerf_title</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+This method retrieves and formats the form title.
+</p>
+<p>
+CSS identifier: <tt>h2</tt>
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000046" class="method-detail">
+        <a name="M000046"></a>
+
+        <div class="method-heading">
+          <a href="SmerfFormsHelper.src/M000046.html" target="Code" class="method-signature"
+            onclick="popupCode('SmerfFormsHelper.src/M000046.html');return false;">
+          <span class="method-name">smerf_welcome</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+This method retrieves and formats the form welcome message.
+</p>
+<p>
+CSS identifier: <tt>formWelcome</tt>
+</p>
+        </div>
+      </div>
+
+
+    </div>
+
+
+  </div>
+
+
+<div id="validator-badges">
+  <p><small><a href="http://validator.w3.org/check/referer">[Validate]</a></small></p>
+</div>
+
+</body>
+</html>

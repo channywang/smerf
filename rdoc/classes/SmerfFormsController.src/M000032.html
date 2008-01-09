@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>create (SmerfFormsController)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre><span class="ruby-comment cmt"># File app/controllers/smerf_forms_controller.rb, line 55</span>
+  <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">create</span>
+    <span class="ruby-comment cmt"># Make sure we have some responses</span>
+    <span class="ruby-keyword kw">if</span> (<span class="ruby-identifier">params</span>.<span class="ruby-identifier">has_key?</span>(<span class="ruby-value str">&quot;responses&quot;</span>))
+      <span class="ruby-comment cmt"># Validate user responses</span>
+      <span class="ruby-identifier">validate_responses</span>(<span class="ruby-identifier">params</span>)
+      <span class="ruby-comment cmt"># Save if no errors</span>
+      <span class="ruby-keyword kw">if</span> (<span class="ruby-ivar">@errors</span>.<span class="ruby-identifier">empty?</span>()) 
+        <span class="ruby-comment cmt"># Create the record </span>
+        <span class="ruby-constant">SmerfFormsUser</span>.<span class="ruby-identifier">create_records</span>(
+          <span class="ruby-ivar">@smerfform</span>.<span class="ruby-identifier">id</span>, <span class="ruby-constant">SmerfForm</span>.<span class="ruby-identifier">smerf_user_id</span>, <span class="ruby-ivar">@responses</span>)
+        <span class="ruby-identifier">flash</span>[<span class="ruby-identifier">:notice</span>] = <span class="ruby-node">&quot;#{@smerfform.name} saved successfully&quot;</span>
+        <span class="ruby-comment cmt"># Show the form again, allowing the user to edit responses</span>
+        <span class="ruby-identifier">render</span>(<span class="ruby-identifier">:action</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;edit&quot;</span>)
+      <span class="ruby-keyword kw">end</span>
+    <span class="ruby-keyword kw">else</span>
+      <span class="ruby-identifier">flash</span>[<span class="ruby-identifier">:notice</span>] = <span class="ruby-node">&quot;No responses found in #{@smerfform.name}, nothing saved&quot;</span>      
+    <span class="ruby-keyword kw">end</span>
+  <span class="ruby-keyword kw">end</span></pre>
+</body>
+</html>

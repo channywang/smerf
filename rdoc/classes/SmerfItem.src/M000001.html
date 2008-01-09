@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>new (SmerfItem)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre><span class="ruby-comment cmt"># File app/models/smerf_item.rb, line 46</span>
+  <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">initialize</span>(<span class="ruby-identifier">raw_data</span>, <span class="ruby-identifier">sort_order_field</span>, <span class="ruby-identifier">class_code_array</span>, <span class="ruby-identifier">owner_ident</span>)
+    <span class="ruby-comment cmt"># Store the raw data as extracted from the form definition file</span>
+    <span class="ruby-ivar">@raw_data</span> = <span class="ruby-identifier">raw_data</span>
+    <span class="ruby-comment cmt"># Stores the sort order used to sort items of this class. We then use</span>
+    <span class="ruby-comment cmt"># this field to make sure that the field is actually present in the items</span>
+    <span class="ruby-comment cmt"># definition. For example groups can be sorted by code, the smerf object will</span>
+    <span class="ruby-comment cmt"># pass the sort order field (code) to new group classes it creates, this value</span>
+    <span class="ruby-comment cmt"># is then used to confirm that each group has a code field defined. Form</span>
+    <span class="ruby-comment cmt"># does not have a sort field so it passes an empty string.</span>
+    <span class="ruby-ivar">@sort_order_field</span> = <span class="ruby-identifier">sort_order_field</span>
+    <span class="ruby-comment cmt"># When defining a new section/level in a YAML file you do so by specifying a </span>
+    <span class="ruby-comment cmt"># section/level header, e.g. groups:, but there is no value associated with it,</span>
+    <span class="ruby-comment cmt"># sub items are then defined, i.e. code: xyz. When the YAML file is loaded the </span>
+    <span class="ruby-comment cmt"># header is loaded into an element array with 0 as the index and the items for</span>
+    <span class="ruby-comment cmt"># the level is loaded into another element with 1 as the index. The two data items</span>
+    <span class="ruby-comment cmt"># below are used to store the two bits of data (see decodedata method)</span>
+    <span class="ruby-ivar">@item_tag</span> = <span class="ruby-keyword kw">nil</span>
+    <span class="ruby-ivar">@item_data</span> = <span class="ruby-keyword kw">nil</span>
+    
+    <span class="ruby-comment cmt"># By default make codes be unique for a complete form</span>
+    <span class="ruby-ivar">@code_unique_for_smerf</span> = <span class="ruby-keyword kw">true</span>
+  
+    <span class="ruby-comment cmt"># We may only want to have the items unique within a groups of sub items, for</span>
+    <span class="ruby-comment cmt"># example we want code to be unique for all answers to a question, we may not</span>
+    <span class="ruby-comment cmt"># want to them to unique within a complete form, here we use an instance </span>
+    <span class="ruby-comment cmt"># variable so it only unique for this object</span>
+    <span class="ruby-ivar">@code_array</span> = <span class="ruby-constant">Array</span>.<span class="ruby-identifier">new</span>
+    
+    <span class="ruby-comment cmt"># I was going to use a single class array in this class @@class_code_array </span>
+    <span class="ruby-comment cmt"># but it turns out Ruby at the moment will use the same class variable for </span>
+    <span class="ruby-comment cmt"># ALL classes that derive from this class. This is not what I want as I want </span>
+    <span class="ruby-comment cmt"># to keep a separate list of codes for groups, question. Using the class</span>
+    <span class="ruby-comment cmt"># var in this class means all of them would be mixed in together, not what </span>
+    <span class="ruby-comment cmt"># I want. I believe in Ruby V2 this will ber fixed where the class var would</span>
+    <span class="ruby-comment cmt"># be for the resultant class SmerfGroup. In the mean time I have to create</span>
+    <span class="ruby-comment cmt"># a class var in each child class and pass it in to the base.</span>
+    <span class="ruby-ivar">@class_code_array</span> = <span class="ruby-identifier">class_code_array</span>
+    
+    <span class="ruby-ivar">@owner_ident</span> = <span class="ruby-identifier">owner_ident</span>
+    <span class="ruby-ivar">@object_ident</span> = <span class="ruby-keyword kw">nil</span>
+  <span class="ruby-keyword kw">end</span></pre>
+</body>
+</html>

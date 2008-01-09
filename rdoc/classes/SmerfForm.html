@@ -1,0 +1,350 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>Class: SmerfForm</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <meta http-equiv="Content-Script-Type" content="text/javascript" />
+  <link rel="stylesheet" href=".././rdoc-style.css" type="text/css" media="screen" />
+  <script type="text/javascript">
+  // <![CDATA[
+
+  function popupCode( url ) {
+    window.open(url, "Code", "resizable=yes,scrollbars=yes,toolbar=no,status=no,height=150,width=400")
+  }
+
+  function toggleCode( id ) {
+    if ( document.getElementById )
+      elem = document.getElementById( id );
+    else if ( document.all )
+      elem = eval( "document.all." + id );
+    else
+      return false;
+
+    elemStyle = elem.style;
+    
+    if ( elemStyle.display != "block" ) {
+      elemStyle.display = "block"
+    } else {
+      elemStyle.display = "none"
+    }
+
+    return true;
+  }
+  
+  // Make codeblocks hidden by default
+  document.writeln( "<style type=\"text/css\">div.method-source-code { display: none }</style>" )
+  
+  // ]]>
+  </script>
+
+</head>
+<body>
+
+
+
+    <div id="classHeader">
+        <table class="header-table">
+        <tr class="top-aligned-row">
+          <td><strong>Class</strong></td>
+          <td class="class-name-in-header">SmerfForm</td>
+        </tr>
+        <tr class="top-aligned-row">
+            <td><strong>In:</strong></td>
+            <td>
+                <a href="../files/app/models/smerf_form_rb.html">
+                app/models/smerf_form.rb
+                </a>
+        <br />
+            </td>
+        </tr>
+
+        <tr class="top-aligned-row">
+            <td><strong>Parent:</strong></td>
+            <td>
+                ActiveRecord::Base
+            </td>
+        </tr>
+        </table>
+    </div>
+  <!-- banner header -->
+
+  <div id="bodyContent">
+
+
+
+  <div id="contextContent">
+
+    <div id="description">
+      <p>
+This model class manages the smerf_forms DB table and stores details about
+smerf forms. One of the main function it performs it to rebuild a <a
+href="SmerfForm.html#M000015">form</a> from a <a
+href="SmerfForm.html#M000015">form</a> definition file if required.
+</p>
+
+    </div>
+
+
+   </div>
+
+    <div id="method-list">
+      <h3 class="section-bar">Methods</h3>
+
+      <div class="name-list">
+      <a href="#M000013">active?</a>&nbsp;&nbsp;
+      <a href="#M000014">cache</a>&nbsp;&nbsp;
+      <a href="#M000011">find_by_code</a>&nbsp;&nbsp;
+      <a href="#M000015">form</a>&nbsp;&nbsp;
+      <a href="#M000012">rebuild_cache</a>&nbsp;&nbsp;
+      <a href="#M000016">validate_responses</a>&nbsp;&nbsp;
+      </div>
+    </div>
+
+  </div>
+
+
+    <!-- if includes -->
+    <div id="includes">
+      <h3 class="section-bar">Included Modules</h3>
+
+      <div id="includes-list">
+        <span class="include-name"><a href="SmerfSystemHelpers.html">SmerfSystemHelpers</a></span>
+        <span class="include-name"><a href="SmerfHelpers.html">SmerfHelpers</a></span>
+      </div>
+    </div>
+
+    <div id="section">
+
+
+
+
+
+      
+
+
+    <!-- if method_list -->
+    <div id="methods">
+      <h3 class="section-bar">Public Class methods</h3>
+
+      <div id="method-M000011" class="method-detail">
+        <a name="M000011"></a>
+
+        <div class="method-heading">
+          <a href="SmerfForm.src/M000011.html" target="Code" class="method-signature"
+            onclick="popupCode('SmerfForm.src/M000011.html');return false;">
+          <span class="method-name">find_by_code</span><span class="method-args">(code)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+This method retrieves a <a href="SmerfForm.html#M000015">form</a> record
+using the name of the <a href="SmerfForm.html#M000015">form</a> which is
+the same name as the <a href="SmerfForm.html#M000015">form</a> definition
+file. If the file is called <tt>testsmerf.yml</tt> then the <em>code</em>
+parameter should be <tt>testsmerf</tt>.
+</p>
+        </div>
+      </div>
+
+      <h3 class="section-bar">Public Instance methods</h3>
+
+      <div id="method-M000013" class="method-detail">
+        <a name="M000013"></a>
+
+        <div class="method-heading">
+          <a href="SmerfForm.src/M000013.html" target="Code" class="method-signature"
+            onclick="popupCode('SmerfForm.src/M000013.html');return false;">
+          <span class="method-name">active?</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+This method checks if the <a href="SmerfForm.html#M000015">form</a> is
+active, returns true if it is.
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000014" class="method-detail">
+        <a name="M000014"></a>
+
+        <div class="method-heading">
+          <a href="SmerfForm.src/M000014.html" target="Code" class="method-signature"
+            onclick="popupCode('SmerfForm.src/M000014.html');return false;">
+          <span class="method-name">cache</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Override read attribute accessor for the <a
+href="SmerfForm.html#M000014">cache</a> attribute so that we only
+unserialize this field once which improves performance, it also allows us
+to initialize class variables which are not serialized
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000015" class="method-detail">
+        <a name="M000015"></a>
+
+        <div class="method-heading">
+          <a href="SmerfForm.src/M000015.html" target="Code" class="method-signature"
+            onclick="popupCode('SmerfForm.src/M000015.html');return false;">
+          <span class="method-name">form</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Alias to smerfform.cache[:smerfform]
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000012" class="method-detail">
+        <a name="M000012"></a>
+
+        <div class="method-heading">
+          <a href="SmerfForm.src/M000012.html" target="Code" class="method-signature"
+            onclick="popupCode('SmerfForm.src/M000012.html');return false;">
+          <span class="method-name">rebuild_cache</span><span class="method-args">(code)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+This method processed a <a href="SmerfForm.html#M000015">form</a>
+definition file and stores the results in the smerf_forms DB record.
+</p>
+<p>
+When a <a href="SmerfForm.html#M000015">form</a> definition file is seen
+for the first time, it will be processed and all resultant objects created
+during the processing of the file will be serialized to the <em><a
+href="SmerfForm.html#M000014">cache</a></em> field within the <a
+href="SmerfForm.html#M000015">form</a> record. The <em>cache_date</em> is
+updated with the current date and time.
+</p>
+<p>
+Subsequently the <a href="SmerfForm.html#M000015">form</a> will be
+retrieved directly from the DB record rather than having to rebuilt from
+the definition file. The timestamp of the file is checked against the value
+stored in the <em>cache_date</em> field, if they are different the <a
+href="SmerfForm.html#M000015">form</a> definition will be reprocessed.
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000016" class="method-detail">
+        <a name="M000016"></a>
+
+        <div class="method-heading">
+          <a href="SmerfForm.src/M000016.html" target="Code" class="method-signature"
+            onclick="popupCode('SmerfForm.src/M000016.html');return false;">
+          <span class="method-name">validate_responses</span><span class="method-args">(responses, errors)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+This method validates all user responses.
+</p>
+<p>
+All validations are specified as part of the question (or subquestion)
+definition using the &#8216;validation:&#8217; field. The SMERF validation
+system is very flexible and allows any number of validation methods to be
+specified for a question by comma separating each method.
+</p>
+<pre>
+ validation: validate_mandatory_question, validate_years
+</pre>
+<p>
+Currently there are two validation methods provided with the plugin:
+</p>
+<table>
+<tr><td valign="top">validate_mandatory_question:</td><td>This method will ensure that the user has answered the question
+
+</td></tr>
+<tr><td valign="top">validate_sub_question:</td><td>Only applies to subquestions and makes sure that the user has selected the
+answer that relates to the subquestion, it will also ensure the subquestion
+has been answered if the answer that relates to the subquestion has been
+selected.
+
+</td></tr>
+</table>
+<p>
+SMERF also allows you to define your own custom validation methods. During
+the installation process SMERF creates a helper module called
+smerf_helpers.rb in the /lib directory. You can add new validation methods
+into this module and access them by simply referencing them in the <a
+href="SmerfForm.html#M000015">form</a> definition file. For example we have
+question &#8216;How many years have you worked in the industry&#8217; and
+we want to ensure that the answer provided is between 0-99 we can create a
+new validation method called &#8216;validate_years&#8217;.
+</p>
+<pre>
+  # Example validation method for &quot;How many years have you worked in the industry&quot;
+  # it uses a regex to make sure 0-99 years specified.
+
+  def validate_years(question, responses, form)
+    # Validate entry and make sure years are numeric and between 0-99
+    answer = smerf_get_question_answer(question, responses)
+     if (answer)
+       # Expression will return nil if regex fail, also check charcters
+       # after the match to determine if &gt; 2 numbers specified
+       res = (&quot;#{answer}&quot; =~ /\d{1,2}/)
+       return &quot;Years must be between 0 and 99&quot; if (!res or $'.length() &gt; 0)
+     end
+
+     return nil
+   end
+</pre>
+<p>
+Note: There are some helper methods that you can use within these methods
+included in the smerf_system_helpers.rb module which you can find in the
+plugins lib directory.
+</p>
+<p>
+Your question definition may then look like this:
+</p>
+<pre>
+   how_many_years:
+     code: g2q3
+     type: textfield
+     sort_order: 3
+     header:
+     question: | How many years have you worked in the industry
+     textfield_size: 10
+     validation: validate_mandatory_question, validate_years
+     help:
+</pre>
+<p>
+When the <a href="SmerfForm.html#M000015">form</a> is validated your custom
+validation method will be called. When an error is detected, a summary of
+the errors are displayed at the top of the <a
+href="SmerfForm.html#M000015">form</a>, additionally an error message is
+displayed for each question that has an error. This makes it very easy for
+the user to see which question they need to fix.
+</p>
+        </div>
+      </div>
+
+
+    </div>
+
+
+  </div>
+
+
+<div id="validator-badges">
+  <p><small><a href="http://validator.w3.org/check/referer">[Validate]</a></small></p>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,65 @@
+
+SMERF - Simple MEta Rails Form Plugin Generator
+===============================================
+
+A. Completing the Installation
+------------------------------
+
+1. Run the DB migration
+
+rake db:migrate
+
+2. Set the record ID of the current user so that SMERF can save responses 
+for each user. This can normally be done once the user has been authenticated 
+by using the following code as an example:
+
+SmerfForm.smerf_user_id = current_user.id
+
+3. You can use the example stylesheet(smerf.css) supplied with the plugin 
+which was copied to the /public/stylesheets directory by adding it to your 
+application layout, e.g.
+
+<%= stylesheet_link_tag "smerf", :cache => true  %>
+
+4. To create a link to display a form you can use the Standard REST Path 
+method used for the show action passing the name of the form definition file
+as a parameter, for example
+
+link_to('Complete Test Smerf Form', smerf_url('testsmerf'))
+
+B. Testing your installation
+----------------------------
+
+To test the installation you can display the test form by doing something 
+like this:
+
+1. Set the SMERF user ID in the application.rb file for example to the ID
+of an existing user record, e.g. 
+
+# Set the record ID for the user accessing smerf, normally this would be done
+# once the user has been authenticated
+SmerfForm.smerf_user_id = 1
+
+2. Display the SMERF test form by doing something similar to this
+
+http://localhost:3000/smerf_test
+
+C. More Information
+-------------------
+
+See the README in /vendor/plugin/smerf for more details
+
+SMERF homepage is smerf.itsignals.com.au
+
+D. Please Consider
+------------------
+
+1. If you find this plugin useful it would be greatly appreciated if you could
+recommend me at Working With Rails. I'm a freelance developer and would value
+your recommendations.
+
+http://workingwithrails.com/recommendation/new/person/10053-etienne-van-tonder
+
+2. That you consider freely sharing any changes that you make to the plugin. 
+Also that you share any new functionality that you creare for use with the 
+plugin that you consider may be useful to other users.

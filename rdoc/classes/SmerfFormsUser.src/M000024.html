@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>find_user_smerf_form (SmerfFormsUser)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre><span class="ruby-comment cmt"># File app/models/smerf_forms_user.rb, line 19</span>
+  <span class="ruby-keyword kw">def</span> <span class="ruby-constant">SmerfFormsUser</span>.<span class="ruby-identifier">find_user_smerf_form</span>(<span class="ruby-identifier">user_id</span>, <span class="ruby-identifier">smerf_form_id</span>)
+    <span class="ruby-comment cmt"># Find the form record for the current user</span>
+    <span class="ruby-identifier">smerf_forms_user</span> = <span class="ruby-keyword kw">nil</span>
+    <span class="ruby-keyword kw">if</span> (<span class="ruby-identifier">user_id</span> <span class="ruby-operator">&gt;</span> <span class="ruby-value">0</span>)
+      <span class="ruby-identifier">smerf_forms_users</span> = <span class="ruby-constant">SmerfFormsUser</span>.<span class="ruby-identifier">find</span>(<span class="ruby-identifier">:first</span>, 
+        <span class="ruby-identifier">:conditions</span> =<span class="ruby-operator">&gt;</span> [<span class="ruby-value str">'smerf_form_id = ? AND user_id = ?'</span>, 
+        <span class="ruby-identifier">smerf_form_id</span>, <span class="ruby-identifier">user_id</span>])
+    <span class="ruby-keyword kw">else</span>
+      <span class="ruby-identifier">raise</span>(<span class="ruby-constant">RuntimeError</span>, 
+        <span class="ruby-value str">&quot;For the form responses to be saved for a user, a record ID for 
+        the user table needs to be specified. This can be set by using 
+        setter function SmerfForm.smerf_user_id, e.g. SmerfForm.smerf_user_id = 1&quot;</span>)
+    <span class="ruby-keyword kw">end</span> 
+    
+    <span class="ruby-keyword kw">return</span> <span class="ruby-identifier">smerf_forms_users</span>
+  <span class="ruby-keyword kw">end</span></pre>
+</body>
+</html>

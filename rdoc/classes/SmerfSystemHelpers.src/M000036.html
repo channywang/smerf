@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>validate_sub_question (SmerfSystemHelpers)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre><span class="ruby-comment cmt"># File generators/smerf/templates/lib/smerf_system_helpers.rb, line 51</span>
+  <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">validate_sub_question</span>(<span class="ruby-identifier">question</span>, <span class="ruby-identifier">responses</span>, <span class="ruby-identifier">form</span>)
+    <span class="ruby-comment cmt"># Retrieve the owner object of this subquestion</span>
+    <span class="ruby-identifier">answer_object</span> = <span class="ruby-identifier">smerf_get_owner_object</span>(<span class="ruby-identifier">question</span>, <span class="ruby-identifier">form</span>)
+    <span class="ruby-comment cmt"># Make sure owner object is a SmerfAnswer</span>
+    <span class="ruby-identifier">raise</span>(<span class="ruby-constant">RuntimeError</span>, <span class="ruby-value str">&quot;Owner object not a SmerfAnswer&quot;</span>) <span class="ruby-keyword kw">if</span> (<span class="ruby-operator">!</span><span class="ruby-identifier">answer_object</span>.<span class="ruby-identifier">kind_of?</span>(<span class="ruby-constant">SmerfAnswer</span>))
+    <span class="ruby-comment cmt"># Get the answer code</span>
+    <span class="ruby-identifier">answer_code</span> = <span class="ruby-identifier">answer_object</span>.<span class="ruby-identifier">code</span>
+    <span class="ruby-comment cmt"># Retrieve the owner object of the answer</span>
+    <span class="ruby-identifier">question_object</span> = <span class="ruby-identifier">smerf_get_owner_object</span>(<span class="ruby-identifier">answer_object</span>, <span class="ruby-identifier">form</span>)
+
+    <span class="ruby-comment cmt"># 1. Make sure that the answer that relates to this subsequestion </span>
+    <span class="ruby-comment cmt"># has the correct response, e.g.</span>
+    <span class="ruby-comment cmt"># Select your skills</span>
+    <span class="ruby-comment cmt"># Banker</span>
+    <span class="ruby-comment cmt"># Builder</span>
+    <span class="ruby-comment cmt"># ...</span>
+    <span class="ruby-comment cmt"># Other</span>
+    <span class="ruby-comment cmt">#    Please specify</span>
+    <span class="ruby-comment cmt"># We want to make sure 'Other' was selected if the 'Please specify'</span>
+    <span class="ruby-comment cmt"># subquestion has an answer</span>
+    <span class="ruby-comment cmt"># </span>
+    <span class="ruby-comment cmt"># Check if this subquestion has an answer</span>
+    <span class="ruby-keyword kw">if</span> (<span class="ruby-identifier">smerf_question_answered?</span>(<span class="ruby-identifier">question</span>, <span class="ruby-identifier">responses</span>))
+      <span class="ruby-comment cmt"># Check if the correct answer selected</span>
+      <span class="ruby-keyword kw">if</span> (<span class="ruby-operator">!</span><span class="ruby-identifier">smerf_question_has_answer?</span>(<span class="ruby-identifier">question_object</span>, <span class="ruby-identifier">responses</span>, <span class="ruby-identifier">answer_code</span>))
+        <span class="ruby-keyword kw">return</span> <span class="ruby-node">&quot;'#{answer_object.answer}' needs to be selected&quot;</span>
+      <span class="ruby-keyword kw">end</span>  
+    <span class="ruby-keyword kw">end</span>
+    
+    <span class="ruby-comment cmt"># 2. Make sure that if an answer that has a subquestion is answered that</span>
+    <span class="ruby-comment cmt"># the subquestion has an answer, e.g.</span>
+    <span class="ruby-comment cmt">#</span>
+    <span class="ruby-comment cmt"># Select your skills</span>
+    <span class="ruby-comment cmt"># Banker</span>
+    <span class="ruby-comment cmt"># Builder</span>
+    <span class="ruby-comment cmt"># ...</span>
+    <span class="ruby-comment cmt"># Other</span>
+    <span class="ruby-comment cmt">#    Please specify</span>
+    <span class="ruby-comment cmt"># We want to make sure that if 'Other' was selected the 'Please specify'</span>
+    <span class="ruby-comment cmt"># subquestion has an answer</span>
+    <span class="ruby-comment cmt"># </span>
+    <span class="ruby-comment cmt"># Check if the answer this subquestion relates to has been answered</span>
+    <span class="ruby-keyword kw">if</span> (<span class="ruby-identifier">smerf_question_has_answer?</span>(<span class="ruby-identifier">question_object</span>, <span class="ruby-identifier">responses</span>, <span class="ruby-identifier">answer_code</span>))
+      <span class="ruby-comment cmt"># Make sure the subquestion has been answered</span>
+      <span class="ruby-keyword kw">if</span> (<span class="ruby-operator">!</span><span class="ruby-identifier">smerf_question_answered?</span>(<span class="ruby-identifier">question</span>, <span class="ruby-identifier">responses</span>))
+        <span class="ruby-keyword kw">return</span> <span class="ruby-node">&quot;'#{answer_object.answer}' needs additional information&quot;</span>
+      <span class="ruby-keyword kw">end</span>        
+    <span class="ruby-keyword kw">end</span>
+    
+    <span class="ruby-keyword kw">return</span> <span class="ruby-keyword kw">nil</span>
+  <span class="ruby-keyword kw">end</span></pre>
+</body>
+</html>

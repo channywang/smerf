@@ -1,0 +1,306 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>Module: SmerfSystemHelpers</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <meta http-equiv="Content-Script-Type" content="text/javascript" />
+  <link rel="stylesheet" href=".././rdoc-style.css" type="text/css" media="screen" />
+  <script type="text/javascript">
+  // <![CDATA[
+
+  function popupCode( url ) {
+    window.open(url, "Code", "resizable=yes,scrollbars=yes,toolbar=no,status=no,height=150,width=400")
+  }
+
+  function toggleCode( id ) {
+    if ( document.getElementById )
+      elem = document.getElementById( id );
+    else if ( document.all )
+      elem = eval( "document.all." + id );
+    else
+      return false;
+
+    elemStyle = elem.style;
+    
+    if ( elemStyle.display != "block" ) {
+      elemStyle.display = "block"
+    } else {
+      elemStyle.display = "none"
+    }
+
+    return true;
+  }
+  
+  // Make codeblocks hidden by default
+  document.writeln( "<style type=\"text/css\">div.method-source-code { display: none }</style>" )
+  
+  // ]]>
+  </script>
+
+</head>
+<body>
+
+
+
+    <div id="classHeader">
+        <table class="header-table">
+        <tr class="top-aligned-row">
+          <td><strong>Module</strong></td>
+          <td class="class-name-in-header">SmerfSystemHelpers</td>
+        </tr>
+        <tr class="top-aligned-row">
+            <td><strong>In:</strong></td>
+            <td>
+                <a href="../files/generators/smerf/templates/lib/smerf_system_helpers_rb.html">
+                generators/smerf/templates/lib/smerf_system_helpers.rb
+                </a>
+        <br />
+            </td>
+        </tr>
+
+        </table>
+    </div>
+  <!-- banner header -->
+
+  <div id="bodyContent">
+
+
+
+  <div id="contextContent">
+
+    <div id="description">
+      <p>
+This module contains some standard helper methods used by smerf.
+</p>
+<p>
+All validation methods need to take three parameters:
+</p>
+<table>
+<tr><td valign="top">question:</td><td>The <a href="SmerfQuestion.html">SmerfQuestion</a> object to be validated
+
+</td></tr>
+<tr><td valign="top">responses:</td><td>Hash containing user responses keyed using the question code
+
+</td></tr>
+<tr><td valign="top">form:</td><td>Hash that contains all form objects including groups, questions and answers
+
+</td></tr>
+</table>
+<p>
+The method needs to return an empty string or nil if no errors or if there
+is an error then an error message describing the error should be returned.
+</p>
+<p>
+Within the form definition file you specify if a validation is required on
+a question by specifying which methods within this module should be called
+to perform that validation, e.g.
+</p>
+<p>
+specify_your_age:
+</p>
+<pre>
+  code: g1q1
+  type: singlechoice
+  sort_order: 1
+  question: | Specify your ages
+  help: | Select the &lt;b&gt;one&lt;/b&gt; that apply
+  validation: validation_mandatory
+</pre>
+<p>
+Multiple validation methods can be specified by comma separating each
+method name.
+</p>
+
+    </div>
+
+
+   </div>
+
+    <div id="method-list">
+      <h3 class="section-bar">Methods</h3>
+
+      <div class="name-list">
+      <a href="#M000037">smerf_get_object</a>&nbsp;&nbsp;
+      <a href="#M000038">smerf_get_owner_object</a>&nbsp;&nbsp;
+      <a href="#M000041">smerf_get_question_answer</a>&nbsp;&nbsp;
+      <a href="#M000039">smerf_question_answered?</a>&nbsp;&nbsp;
+      <a href="#M000040">smerf_question_has_answer?</a>&nbsp;&nbsp;
+      <a href="#M000035">validate_mandatory_question</a>&nbsp;&nbsp;
+      <a href="#M000036">validate_sub_question</a>&nbsp;&nbsp;
+      </div>
+    </div>
+
+  </div>
+
+
+    <!-- if includes -->
+
+    <div id="section">
+
+
+
+
+
+      
+
+
+    <!-- if method_list -->
+    <div id="methods">
+      <h3 class="section-bar">Public Instance methods</h3>
+
+      <div id="method-M000037" class="method-detail">
+        <a name="M000037"></a>
+
+        <div class="method-heading">
+          <a href="SmerfSystemHelpers.src/M000037.html" target="Code" class="method-signature"
+            onclick="popupCode('SmerfSystemHelpers.src/M000037.html');return false;">
+          <span class="method-name">smerf_get_object</span><span class="method-args">(object_ident, form)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+This method will find the object with the specified object ident
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000038" class="method-detail">
+        <a name="M000038"></a>
+
+        <div class="method-heading">
+          <a href="SmerfSystemHelpers.src/M000038.html" target="Code" class="method-signature"
+            onclick="popupCode('SmerfSystemHelpers.src/M000038.html');return false;">
+          <span class="method-name">smerf_get_owner_object</span><span class="method-args">(object, form)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+This method will find the owner object of the object passed in as a
+parameter
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000041" class="method-detail">
+        <a name="M000041"></a>
+
+        <div class="method-heading">
+          <a href="SmerfSystemHelpers.src/M000041.html" target="Code" class="method-signature"
+            onclick="popupCode('SmerfSystemHelpers.src/M000041.html');return false;">
+          <span class="method-name">smerf_get_question_answer</span><span class="method-args">(question, responses)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+This method retrieves the answer to the supplied question, if no answer
+found it will return nil. This method may return a hash containing all
+answers if the question allows multiple choices.
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000039" class="method-detail">
+        <a name="M000039"></a>
+
+        <div class="method-heading">
+          <a href="SmerfSystemHelpers.src/M000039.html" target="Code" class="method-signature"
+            onclick="popupCode('SmerfSystemHelpers.src/M000039.html');return false;">
+          <span class="method-name">smerf_question_answered?</span><span class="method-args">(question, responses)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+This method check the to see if the supplied question has been answered
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000040" class="method-detail">
+        <a name="M000040"></a>
+
+        <div class="method-heading">
+          <a href="SmerfSystemHelpers.src/M000040.html" target="Code" class="method-signature"
+            onclick="popupCode('SmerfSystemHelpers.src/M000040.html');return false;">
+          <span class="method-name">smerf_question_has_answer?</span><span class="method-args">(question, responses, answer)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+This method will check if the question has the answer passed as a
+parameter. Some questions allow multiple answers so we need to check if one
+of the answers is equal to the supplied answer.
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000035" class="method-detail">
+        <a name="M000035"></a>
+
+        <div class="method-heading">
+          <a href="SmerfSystemHelpers.src/M000035.html" target="Code" class="method-signature"
+            onclick="popupCode('SmerfSystemHelpers.src/M000035.html');return false;">
+          <span class="method-name">validate_mandatory_question</span><span class="method-args">(question, responses, form)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+This method checks to make sure that mandatory questions have been answered
+by the user
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000036" class="method-detail">
+        <a name="M000036"></a>
+
+        <div class="method-heading">
+          <a href="SmerfSystemHelpers.src/M000036.html" target="Code" class="method-signature"
+            onclick="popupCode('SmerfSystemHelpers.src/M000036.html');return false;">
+          <span class="method-name">validate_sub_question</span><span class="method-args">(question, responses, form)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+This method will perform two checks:
+</p>
+<ol>
+<li>Check if the subquestion has been answered, if so then we want to make sure
+that the answer this subquestion relates to has been answered
+
+</li>
+<li>If the answer that has a subquestion is answered then make sure the
+subquestion has been answered
+
+</li>
+</ol>
+<p>
+This validation method is called from a subquestion, so the object
+parameter should be a subquestion
+</p>
+        </div>
+      </div>
+
+
+    </div>
+
+
+  </div>
+
+
+<div id="validator-badges">
+  <p><small><a href="http://validator.w3.org/check/referer">[Validate]</a></small></p>
+</div>
+
+</body>
+</html>
