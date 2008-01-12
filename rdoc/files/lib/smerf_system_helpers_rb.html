@@ -5,10 +5,10 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
-  <title>Module: SmerfHelpers</title>
+  <title>File: smerf_system_helpers.rb</title>
   <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
   <meta http-equiv="Content-Script-Type" content="text/javascript" />
-  <link rel="stylesheet" href=".././rdoc-style.css" type="text/css" media="screen" />
+  <link rel="stylesheet" href="../.././rdoc-style.css" type="text/css" media="screen" />
   <script type="text/javascript">
   // <![CDATA[
 
@@ -46,24 +46,20 @@
 
 
 
-    <div id="classHeader">
-        <table class="header-table">
-        <tr class="top-aligned-row">
-          <td><strong>Module</strong></td>
-          <td class="class-name-in-header">SmerfHelpers</td>
-        </tr>
-        <tr class="top-aligned-row">
-            <td><strong>In:</strong></td>
-            <td>
-                <a href="../files/lib/smerf_helpers_rb.html">
-                lib/smerf_helpers.rb
-                </a>
-        <br />
-            </td>
-        </tr>
-
-        </table>
-    </div>
+  <div id="fileHeader">
+    <h1>smerf_system_helpers.rb</h1>
+    <table class="header-table">
+    <tr class="top-aligned-row">
+      <td><strong>Path:</strong></td>
+      <td>lib/smerf_system_helpers.rb
+      </td>
+    </tr>
+    <tr class="top-aligned-row">
+      <td><strong>Last Update:</strong></td>
+      <td>Sat Jan 12 15:23:43 +1100 2008</td>
+    </tr>
+    </table>
+  </div>
   <!-- banner header -->
 
   <div id="bodyContent">
@@ -74,14 +70,14 @@
 
     <div id="description">
       <p>
-This module contains helper methods used by smerf, in particular custom
-user defined validation methods that are used to validate user responses.
+This module contains some standard helper methods used by smerf.
 </p>
 <p>
 All validation methods need to take three parameters:
 </p>
 <table>
-<tr><td valign="top">question:</td><td>The <a href="SmerfQuestion.html">SmerfQuestion</a> object to be validated
+<tr><td valign="top">question:</td><td>The <a href="../../classes/SmerfQuestion.html">SmerfQuestion</a> object to
+be validated
 
 </td></tr>
 <tr><td valign="top">responses:</td><td>Hash containing user responses keyed using the question code
@@ -113,8 +109,7 @@ specify_your_age:
 </pre>
 <p>
 Multiple validation methods can be specified by comma separating each
-method name, there are also some standard validation methods supplied with
-smerf that can be used as well as your own defined within this module.
+method name.
 </p>
 
     </div>
@@ -122,13 +117,6 @@ smerf that can be used as well as your own defined within this module.
 
    </div>
 
-    <div id="method-list">
-      <h3 class="section-bar">Methods</h3>
-
-      <div class="name-list">
-      <a href="#M000042">validate_years</a>&nbsp;&nbsp;
-      </div>
-    </div>
 
   </div>
 
@@ -145,29 +133,6 @@ smerf that can be used as well as your own defined within this module.
 
 
     <!-- if method_list -->
-    <div id="methods">
-      <h3 class="section-bar">Public Instance methods</h3>
-
-      <div id="method-M000042" class="method-detail">
-        <a name="M000042"></a>
-
-        <div class="method-heading">
-          <a href="SmerfHelpers.src/M000042.html" target="Code" class="method-signature"
-            onclick="popupCode('SmerfHelpers.src/M000042.html');return false;">
-          <span class="method-name">validate_years</span><span class="method-args">(question, responses, form)</span>
-          </a>
-        </div>
-      
-        <div class="method-description">
-          <p>
-Example validation method for &quot;How many years have you worked in the
-industry&quot; it uses a regex to make sure 0-99 years specified.
-</p>
-        </div>
-      </div>
-
-
-    </div>
 
 
   </div>
