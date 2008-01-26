@@ -205,6 +205,8 @@ textbox:: Allows the user to enter a large amount of free text, the size of the
           text box can be specified 
 textfield:: Allows the user to enter a small amount of free form text, the size 
             of the text field can be specified 
+selectionbox:: Allows the user to select one or more answers from a dropdown list 
+               of possible choices
 
 The following fields can be used to define a question:
 
@@ -228,6 +230,7 @@ answers:: Defines the answers to the question if the question type displays a
 validation:: Specifies the validation methods (comma separated) that should be 
              executed for this question, see Validation and Errors section for 
              more details
+selectionbox_multiplechoice:: Specifies if the selection box should allow multiple choices
  
 Below is an example question definition:
 

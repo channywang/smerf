@@ -5,15 +5,15 @@
 
 <html>
 <head>
-  <title>smerf_title (SmerfFormsHelper)</title>
+  <title>smerf_welcome (SmerfFormsHelper)</title>
   <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
   <link rel="stylesheet" href="../.././rdoc-style.css" type="text/css" media="screen" />
 </head>
 <body class="standalone-code">
-  <pre><span class="ruby-comment cmt"># File app/helpers/smerf_forms_helper.rb, line 53</span>
-  <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">smerf_title</span>
-    <span class="ruby-keyword kw">if</span> <span class="ruby-operator">!</span><span class="ruby-ivar">@smerfform</span>.<span class="ruby-identifier">form</span>().<span class="ruby-identifier">name</span>.<span class="ruby-identifier">blank?</span>
-      <span class="ruby-identifier">content_tag</span>(<span class="ruby-identifier">:h2</span>, <span class="ruby-ivar">@smerfform</span>.<span class="ruby-identifier">form</span>().<span class="ruby-identifier">name</span>)
+  <pre><span class="ruby-comment cmt"># File app/helpers/smerf_forms_helper.rb, line 63</span>
+  <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">smerf_welcome</span>
+    <span class="ruby-keyword kw">if</span> <span class="ruby-operator">!</span><span class="ruby-ivar">@smerfform</span>.<span class="ruby-identifier">form</span>().<span class="ruby-identifier">welcome</span>.<span class="ruby-identifier">blank?</span>
+      <span class="ruby-identifier">content_tag</span>(<span class="ruby-identifier">:div</span>, <span class="ruby-identifier">content_tag</span>(<span class="ruby-identifier">:p</span>, <span class="ruby-ivar">@smerfform</span>.<span class="ruby-identifier">form</span>().<span class="ruby-identifier">welcome</span>), <span class="ruby-identifier">:class</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;smerfWelcome&quot;</span>)
     <span class="ruby-keyword kw">end</span>
   <span class="ruby-keyword kw">end</span></pre>
 </body>

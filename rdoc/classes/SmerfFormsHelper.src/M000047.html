@@ -5,15 +5,15 @@
 
 <html>
 <head>
-  <title>smerf_thank_you (SmerfFormsHelper)</title>
+  <title>smerf_group_name (SmerfFormsHelper)</title>
   <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
   <link rel="stylesheet" href="../.././rdoc-style.css" type="text/css" media="screen" />
 </head>
 <body class="standalone-code">
-  <pre><span class="ruby-comment cmt"># File app/helpers/smerf_forms_helper.rb, line 73</span>
-  <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">smerf_thank_you</span>
-    <span class="ruby-keyword kw">if</span> <span class="ruby-operator">!</span><span class="ruby-ivar">@smerfform</span>.<span class="ruby-identifier">form</span>().<span class="ruby-identifier">thank_you</span>.<span class="ruby-identifier">blank?</span>
-      <span class="ruby-identifier">content_tag</span>(<span class="ruby-identifier">:div</span>, <span class="ruby-identifier">content_tag</span>(<span class="ruby-identifier">:p</span>, <span class="ruby-ivar">@smerfform</span>.<span class="ruby-identifier">form</span>().<span class="ruby-identifier">thank_you</span>), <span class="ruby-identifier">:class</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;smerfThankyou&quot;</span>)
+  <pre><span class="ruby-comment cmt"># File app/helpers/smerf_forms_helper.rb, line 84</span>
+  <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">smerf_group_name</span>(<span class="ruby-identifier">group</span>)
+    <span class="ruby-keyword kw">if</span> <span class="ruby-operator">!</span><span class="ruby-identifier">group</span>.<span class="ruby-identifier">name</span>.<span class="ruby-identifier">blank?</span>
+      <span class="ruby-identifier">content_tag</span>(<span class="ruby-identifier">:div</span>, <span class="ruby-identifier">content_tag</span>(<span class="ruby-identifier">:h3</span>, <span class="ruby-identifier">group</span>.<span class="ruby-identifier">name</span>), <span class="ruby-identifier">:class</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;smerfGroup&quot;</span>)
     <span class="ruby-keyword kw">end</span>
   <span class="ruby-keyword kw">end</span></pre>
 </body>

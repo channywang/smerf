@@ -35,19 +35,25 @@
           <span class="ruby-keyword kw">if</span> (<span class="ruby-identifier">question_response</span>[<span class="ruby-value">1</span>].<span class="ruby-identifier">kind_of?</span>(<span class="ruby-constant">Hash</span>) <span class="ruby-keyword kw">or</span> 
             <span class="ruby-identifier">question_response</span>[<span class="ruby-value">1</span>].<span class="ruby-identifier">kind_of?</span>(<span class="ruby-constant">Array</span>))
             <span class="ruby-identifier">question_response</span>[<span class="ruby-value">1</span>].<span class="ruby-identifier">each</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">multichoice_response</span><span class="ruby-operator">|</span>
-              <span class="ruby-keyword kw">if</span> (<span class="ruby-operator">!</span><span class="ruby-identifier">multichoice_response</span>[<span class="ruby-value">1</span>].<span class="ruby-identifier">blank?</span>())
+              <span class="ruby-keyword kw">if</span> (<span class="ruby-identifier">multichoice_response</span>.<span class="ruby-identifier">kind_of?</span>(<span class="ruby-constant">Hash</span>) <span class="ruby-keyword kw">or</span> 
+                <span class="ruby-identifier">multichoice_response</span>.<span class="ruby-identifier">kind_of?</span>(<span class="ruby-constant">Array</span>))
+                <span class="ruby-identifier">response</span> = <span class="ruby-identifier">multichoice_response</span>[<span class="ruby-value">1</span>]
+              <span class="ruby-keyword kw">else</span>
+                <span class="ruby-identifier">response</span> = <span class="ruby-identifier">multichoice_response</span>
+              <span class="ruby-keyword kw">end</span>
+              <span class="ruby-keyword kw">if</span> (<span class="ruby-operator">!</span><span class="ruby-identifier">response</span>.<span class="ruby-identifier">blank?</span>())
                 <span class="ruby-comment cmt"># Check if this response already exists, if so we add the </span>
                 <span class="ruby-comment cmt"># SurveyResponse object to the array, otherwise we create a </span>
                 <span class="ruby-comment cmt"># new response object</span>
                 <span class="ruby-comment cmt">#</span>
                 <span class="ruby-keyword kw">if</span> (<span class="ruby-identifier">found</span> = <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">response_exist?</span>(<span class="ruby-identifier">current_responses</span>, 
-                  <span class="ruby-identifier">question_response</span>[<span class="ruby-value">0</span>], <span class="ruby-identifier">multichoice_response</span>[<span class="ruby-value">1</span>]))
+                  <span class="ruby-identifier">question_response</span>[<span class="ruby-value">0</span>], <span class="ruby-identifier">response</span>))
                   <span class="ruby-identifier">new_responses</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">found</span>
                 <span class="ruby-keyword kw">else</span>  
                   <span class="ruby-identifier">new_responses</span> <span class="ruby-operator">&lt;&lt;</span> (<span class="ruby-constant">SmerfResponse</span>.<span class="ruby-identifier">new</span>(
                     <span class="ruby-identifier">:smerf_forms_user_id</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">smerf_forms_user</span>.<span class="ruby-identifier">id</span>, 
                     <span class="ruby-identifier">:question_code</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">question_response</span>[<span class="ruby-value">0</span>],
-                    <span class="ruby-identifier">:response</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">multichoice_response</span>[<span class="ruby-value">1</span>]))           
+                    <span class="ruby-identifier">:response</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">response</span>))           
                 <span class="ruby-keyword kw">end</span>
               <span class="ruby-keyword kw">end</span>
             <span class="ruby-keyword kw">end</span>

@@ -158,6 +158,8 @@ module SmerfFormsHelper
       contents += get_textfield(question)
     when 'singlechoice'
       contents += get_singlechoice(question, level)
+    when 'selectionbox'
+      contents += get_selectionbox(question, level)
     else  
       raise("Unknown question type for question: #{question.question}")
     end
@@ -287,7 +289,45 @@ module SmerfFormsHelper
       end
       return contents
     end
-    
+ 
+    # Format drop down box(select) question
+    #
+    def get_selectionbox(question, level)
+      # Note: This question type can not have subquestions      
+      contents = ""
+      answers = "\n"
+      question.answer_objects.each do |answer|
+        # Get the user input if available
+        user_answer = nil
+        if (@responses and !@responses.empty?() and 
+          @responses.has_key?("#{question.code}") and
+          @responses["#{question.code}"].include?("#{answer.code}"))
+          user_answer = answer.code
+        end
+        # Format answers
+        answers += '<option ' + 
+          # If user responses then set on if answer available
+          (((user_answer and !user_answer.blank?() and user_answer.to_s() == answer.code.to_s()) or   
+          # If this is a new record and no response have been entered, i.e. this is the
+          # first time the new record form is displayed set on if default 
+          ((!@responses or @responses.empty?() or !@responses.has_key?("#{question.code}")) and params['action'] == 'show' and
+          answer.default.upcase == 'Y')) ?  ' selected="selected"' : '') 
+        answers += ' value="' + answer.code.to_s() + '">' +       
+          answer.answer + "</option>\n"
+      end
+        
+      # Note the additional [] in the select_tag name, without this we only get 
+      # one choice in params, adding the [] gets all choices as an array
+      html = "\n" + select_tag("responses[#{question.code}][]", answers, :multiple => 
+        # Check if multiple choice
+        (question.selectionbox_multiplechoice and 
+        !question.selectionbox_multiplechoice.blank?() and
+        question.selectionbox_multiplechoice.upcase == 'Y'))
+      contents += content_tag(:div, content_tag(:p, html), :class => "select")
+      
+      return contents
+    end
+   
     # Some questions/sub questions may not actually have any question text,
     # e.g. sub question. When an error occurs we want to display the text
     # of the question where the problem has occurred so this function will

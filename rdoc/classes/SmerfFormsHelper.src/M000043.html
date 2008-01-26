@@ -5,34 +5,15 @@
 
 <html>
 <head>
-  <title>get_error_messages (SmerfFormsHelper)</title>
+  <title>get_notice_messages (SmerfFormsHelper)</title>
   <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
   <link rel="stylesheet" href="../.././rdoc-style.css" type="text/css" media="screen" />
 </head>
 <body class="standalone-code">
-  <pre><span class="ruby-comment cmt"># File app/helpers/smerf_forms_helper.rb, line 12</span>
-  <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">get_error_messages</span>(<span class="ruby-identifier">errors</span>)
-    <span class="ruby-keyword kw">if</span> (<span class="ruby-identifier">errors</span> <span class="ruby-keyword kw">and</span> <span class="ruby-operator">!</span><span class="ruby-identifier">errors</span>.<span class="ruby-identifier">empty?</span>())
-      <span class="ruby-identifier">header_message</span> = 
-        <span class="ruby-node">&quot;#{pluralize(errors.size(), 'error')} prevented #{@smerfform.name} from being saved&quot;</span>
-      <span class="ruby-identifier">error_messages</span> = <span class="ruby-value str">&quot;&quot;</span>
-      <span class="ruby-identifier">errors</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">error</span><span class="ruby-operator">|</span> 
-        <span class="ruby-comment cmt"># Check if question text available as some questions may have no text, </span>
-        <span class="ruby-comment cmt"># e.g. sub questions. If this happens we check all parent objects to see</span>
-        <span class="ruby-comment cmt"># if the question text is available until text found or no more parents</span>
-        <span class="ruby-identifier">question</span> = (<span class="ruby-identifier">error</span>[<span class="ruby-value">1</span>][<span class="ruby-value str">&quot;question&quot;</span>] <span class="ruby-keyword kw">and</span> <span class="ruby-operator">!</span><span class="ruby-identifier">error</span>[<span class="ruby-value">1</span>][<span class="ruby-value str">&quot;question&quot;</span>].<span class="ruby-identifier">blank?</span>()) <span class="ruby-operator">?</span> <span class="ruby-identifier">error</span>[<span class="ruby-value">1</span>][<span class="ruby-value str">&quot;question&quot;</span>] <span class="ruby-operator">:</span> <span class="ruby-identifier">find_question_text</span>(<span class="ruby-identifier">error</span>[<span class="ruby-value">0</span>])        
-        <span class="ruby-comment cmt"># Format error message</span>
-        <span class="ruby-identifier">error</span>[<span class="ruby-value">1</span>][<span class="ruby-value str">&quot;msg&quot;</span>].<span class="ruby-identifier">each</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">error_msg</span><span class="ruby-operator">|</span>
-          <span class="ruby-identifier">error_messages</span> <span class="ruby-operator">+=</span> <span class="ruby-identifier">content_tag</span>(<span class="ruby-identifier">:li</span>, <span class="ruby-node">&quot;#{question}: #{error_msg}&quot;</span>) 
-        <span class="ruby-keyword kw">end</span>
-      <span class="ruby-keyword kw">end</span>
-      <span class="ruby-identifier">content_tag</span>(<span class="ruby-identifier">:div</span>,
-        <span class="ruby-identifier">content_tag</span>(<span class="ruby-identifier">:h2</span>, <span class="ruby-identifier">header_message</span>) <span class="ruby-operator">&lt;&lt;</span>
-          <span class="ruby-identifier">content_tag</span>(<span class="ruby-identifier">:p</span>, <span class="ruby-value str">'There were problems with the following questions:'</span>) <span class="ruby-operator">&lt;&lt;</span>
-          <span class="ruby-identifier">content_tag</span>(<span class="ruby-identifier">:ul</span>, <span class="ruby-identifier">error_messages</span>),
-        <span class="ruby-identifier">:class</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;smerfFormError&quot;</span>)
-    <span class="ruby-keyword kw">else</span>
-      <span class="ruby-value str">''</span>
+  <pre><span class="ruby-comment cmt"># File app/helpers/smerf_forms_helper.rb, line 43</span>
+  <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">get_notice_messages</span>
+    <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">flash</span>[<span class="ruby-identifier">:notice</span>]
+      <span class="ruby-identifier">content_tag</span>(<span class="ruby-identifier">:div</span>, <span class="ruby-identifier">content_tag</span>(<span class="ruby-identifier">:p</span>, <span class="ruby-identifier">flash</span>[<span class="ruby-identifier">:notice</span>]), <span class="ruby-identifier">:class</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;smerfFormNotice&quot;</span>)
     <span class="ruby-keyword kw">end</span>
   <span class="ruby-keyword kw">end</span></pre>
 </body>

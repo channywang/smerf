@@ -141,6 +141,64 @@ smerfform:
                     textbox_size: 30x3
                     validation: validate_sub_question
 
+        favourite_color:
+          code: g1q4
+          type: selectionbox
+          sort_order: 4
+          question: | What is your favourite colour 
+          help: | Choose <b>one</b> of the following    
+          validation: validate_mandatory_question
+          answers:
+            red:
+              code: 1
+              answer: | Red
+              sort_order: 1
+              default: N
+            blue:
+              code: 2
+              answer: | Blue 
+              sort_order: 2
+              default: Y
+            green:
+              code: 3
+              answer: | Green 
+              sort_order: 3
+              default: N
+            yellow:
+              code: 4
+              answer: | Yellow 
+              sort_order: 4
+              default: N
+
+        os_travel:
+          code: g1q5
+          type: selectionbox
+          sort_order: 4
+          question: | Which countries have you visited 
+          help: | Choose <b>all</b> that apply 
+          selectionbox_multiplechoice: Y
+          answers:
+            au:
+              code: 1
+              answer: | Australia
+              sort_order: 1
+              default: N
+            us:
+              code: 2
+              answer: | United States 
+              sort_order: 2
+              default: Y
+            fr:
+              code: 3
+              answer: | France
+              sort_order: 3
+              default: N
+            sa:
+              code: 4
+              answer: | South Africa 
+              sort_order: 4
+              default: N
+
     employment_details:
       code: 2
       name: | Employment Details Group

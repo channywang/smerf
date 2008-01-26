@@ -17,6 +17,8 @@
 #           text box can be specified 
 # textfield:: Allows the user to enter a small amount of free form text, the size 
 #             of the text field can be specified 
+# selectionbox:: Allows the user to select one or more answers from a dropdown list 
+#                of possible choices
 # 
 # The following fields can be used to define a question:
 # 
@@ -40,6 +42,7 @@
 # validation:: Specifies the validation methods (comma separated) that should be 
 #              executed for this question, see Validation and Errors section for 
 #              more details
+# selectionbox_multiplechoice:: Specifies if the dropdown box should allow multiple choices
 #  
 # Below is an example question definition:
 # 
@@ -56,7 +59,7 @@
 
 class SmerfQuestion < SmerfItem
   attr_accessor :code, :type, :question, :sort_order, :help, :textbox_size, :answer_objects 
-  attr_accessor :textfield_size, :header, :validation
+  attr_accessor :textfield_size, :header, :validation, :selectionbox_multiplechoice 
     
   # Array to hold codes for all items for this class, we use this to check for
   # duplicates, for example duplicate question codes as question codes must be 
@@ -127,16 +130,17 @@ class SmerfQuestion < SmerfItem
     #
     def setup_fields      
       @fields = {
-        'code'                      => {'mandatory' => 'Y'},
-        'type'                      => {'mandatory' => 'Y', 'validate_function' => 'check_question_type'},
-        'question'                  => {'mandatory' => 'N'},
-        'sort_order'                => {'mandatory' => 'Y'},
-        'help'                      => {'mandatory' => 'N'},
-        'answers'                   => {'mandatory' => 'N'},
-        'textbox_size'              => {'mandatory' => 'N'},
-        'textfield_size'            => {'mandatory' => 'N'},
-        'header'                    => {'mandatory' => 'N'},
-        'validation'                => {'mandatory' => 'N', 'validate_function' => 'validation_function'},
+        'code'                        => {'mandatory' => 'Y'},
+        'type'                        => {'mandatory' => 'Y', 'validate_function' => 'check_question_type'},
+        'question'                    => {'mandatory' => 'N'},
+        'sort_order'                  => {'mandatory' => 'Y'},
+        'help'                        => {'mandatory' => 'N'},
+        'answers'                     => {'mandatory' => 'N'},
+        'textbox_size'                => {'mandatory' => 'N'},
+        'textfield_size'              => {'mandatory' => 'N'},
+        'header'                      => {'mandatory' => 'N'},
+        'selectionbox_multiplechoice' => {'mandatory' => 'N'},
+        'validation'                  => {'mandatory' => 'N', 'validate_function' => 'validation_function'},
       }
     end
     
@@ -150,6 +154,7 @@ class SmerfQuestion < SmerfItem
       when 'textbox'
       when 'singlechoice'
       when 'textfield'
+      when 'selectionbox'
       else
         error = "Invalid question type #{@type} specified for " + object_id_message() + "\n"
       end
