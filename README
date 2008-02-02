@@ -18,6 +18,14 @@ the users responses so that they can easily be analysed via SQL.
 3. SMERF is a RESTful plugin
 4. It has only been tested with Rails V2
 
+== Download
+
+=== Direct Download
+    Get it from RubyForge at http://rubyforge.org/frs/?group_id=5260
+
+=== Using Rails Plugin Installer
+    ruby script/plugin install http://smerf.rubyforge.org/svn/tags/CURRENT/smerf
+
 == Installation
 
 The plugin is easy to install, once you have downloaded the source code run 
