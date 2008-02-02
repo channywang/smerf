@@ -1,0 +1,15 @@
+== Version 0.0.3
+Minor Enhancements.
+* Add new selectionbox question type.
+* Add selectionbox_multiselect question option.
+* Delete all non-template files from the generator templates directory.
+* Move all non-template files to the plugin app directories.
+* Modify the generator to use the new structure.
+* Update RDoc with new question type details.
+
+== Version 0.0.2
+Minor fix.
+* Changed rdoc generation to not generate the generator directory preventing the conflict.
+
+== Version 0.0.1
+Initial release
