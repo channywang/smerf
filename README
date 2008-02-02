@@ -24,7 +24,7 @@ the users responses so that they can easily be analysed via SQL.
     Get it from RubyForge at http://rubyforge.org/frs/?group_id=5260
 
 === Using Rails Plugin Installer
-    ruby script/plugin install http://smerf.rubyforge.org/svn/tags/CURRENT/smerf
+    ruby script/plugin install http://smerf.rubyforge.org/svn/stable/smerf
 
 == Installation
 
