@@ -23,7 +23,7 @@ class SmerfGenerator < Rails::Generator::NamedBase
     
     @plugin_path = "vendor/plugins/smerf"
   end
-
+ 
   def manifest
     record do |m|
       
