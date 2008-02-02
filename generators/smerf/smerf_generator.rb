@@ -29,10 +29,10 @@ class SmerfGenerator < Rails::Generator::NamedBase
       
       # Migrations
       m.migration_template("migrate/create_smerfs.rb", 
-        "db/migrate", {:migration_file_name => 'create_smerfs'}, :collision => :skip)
+        "db/migrate", {:migration_file_name => 'create_smerfs'})
 
       # Routes
-      m.route_resources(:smerf_forms, :collision => :skip)
+      m.route_resources(:smerf_forms)
 
       # Create smerf directory and copy test form
       m.directory('smerf')
