@@ -1,3 +1,10 @@
+== Version 0.0.4
+Bug Fix.
+* There was a problem with how responses where being handled for the new 
+  selectionbox question type. It was incorrectly accessing the response 
+  as an array when it was a string. Thanks to Alan Materson for finding 
+  and reporting the bug.
+
 == Version 0.0.3
 Minor Enhancements.
 * Add new selectionbox question type.

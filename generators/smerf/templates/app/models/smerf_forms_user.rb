@@ -50,9 +50,11 @@ class <%= link_table_model_class_name %> < ActiveRecord::Base
         if (question_response[1].kind_of?(Hash) or 
           question_response[1].kind_of?(Array))
           question_response[1].each do |multichoice_response|
+            # Bug fix 0.0.4 (thanks Alan Masterson) 
+            response = multichoice_response.kind_of?(Array) ? multichoice_response[1] : multichoice_response
             <%= link_table_model_name %>.smerf_responses << SmerfResponse.new(
               :question_code => question_response[0],
-              :response => multichoice_response[1]) if (!multichoice_response[1].blank?())           
+              :response => response) if (!response.blank?())           
           end
         else          
           <%= link_table_model_name %>.smerf_responses << SmerfResponse.new(
