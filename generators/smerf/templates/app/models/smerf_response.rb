@@ -18,6 +18,6 @@ class SmerfResponse < ActiveRecord::Base
   validates_presence_of :<%= link_table_fk_name %>
   validates_presence_of :question_code
   validates_presence_of :response
-  belongs_to :<%= :link_table_model_name %> 
+  belongs_to :<%= link_table_model_name %> 
   
 end
