@@ -1,8 +1,15 @@
+== Version 0.0.5
+Bug Fixes.
+
+* Modify generator to convert model name to lowercase
+* Fix minor bug in smerf_forms_user template, additional 's' was being added to a variable name 
+* Include smerf_responses.rb in generated files as content on file depends on specified user model
+
 == Version 0.0.4
 Bug Fix.
 * There was a problem with how responses where being handled for the new 
   selectionbox question type. It was incorrectly accessing the response 
-  as an array when it was a string. Thanks to Alan Materson for finding 
+  as an array when it was a string. Thanks to Alan Masterson for finding 
   and reporting the bug.
 
 == Version 0.0.3

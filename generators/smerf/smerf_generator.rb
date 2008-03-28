@@ -7,8 +7,8 @@ class SmerfGenerator < Rails::Generator::NamedBase
   def initialize(runtime_args, runtime_options = {})
     super
 
-    @user_model_name = @name
-    @user_table_name = @name.pluralize
+    @user_model_name = @name.downcase()
+    @user_table_name = @name.pluralize()
     @user_table_fk_name = "#{@user_model_name}_id"
     
     if (("smerf_forms" <=> @user_table_name) <= 0)
@@ -50,6 +50,7 @@ class SmerfGenerator < Rails::Generator::NamedBase
       
       # Copy models
       m.template('app/models/smerf_forms_user.rb', "#{plugin_path}/app/models/#{@link_table_model_file_name}.rb")
+      m.template('app/models/smerf_response.rb', "#{plugin_path}/app/models/smerf_response.rb")
       
       # Copy controllers
       m.template('app/controllers/smerf_forms_controller.rb', "#{plugin_path}/app/controllers/smerf_forms_controller.rb")

@@ -15,9 +15,9 @@
 # This allows analysis of form responses via SQL. 
 
 class SmerfResponse < ActiveRecord::Base
-  validates_presence_of :smerf_forms_user_id
+  validates_presence_of :<%= link_table_fk_name %>
   validates_presence_of :question_code
   validates_presence_of :response
-  belongs_to :smerf_forms_user
+  belongs_to :<%= link_table_model_class_name %>
   
 end

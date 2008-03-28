@@ -20,7 +20,7 @@ class <%= link_table_model_class_name %> < ActiveRecord::Base
     # Find the form record for the current user
     <%= link_table_model_name %> = nil
     if (<%= user_table_fk_name %> > 0)
-      <%= link_table_model_name %>s = <%= link_table_model_class_name %>.find(:first, 
+      <%= link_table_model_name %> = <%= link_table_model_class_name %>.find(:first, 
         :conditions => ['smerf_form_id = ? AND <%= user_table_fk_name %> = ?', 
         smerf_form_id, <%= user_table_fk_name %>])
     else
@@ -30,7 +30,7 @@ class <%= link_table_model_class_name %> < ActiveRecord::Base
         setter function SmerfForm.smerf_user_id, e.g. SmerfForm.smerf_user_id = 1")
     end 
     
-    return <%= link_table_model_name %>s
+    return <%= link_table_model_name %>
   end
 
   # Create a record for the user for the current form

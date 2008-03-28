@@ -31,12 +31,14 @@ the users responses so that they can easily be analysed via SQL.
 The plugin is easy to install, once you have downloaded the source code run 
 the following command from the root directory of your Rails application
 
-    ./script/generate smerf UserModelName
+    ./script/generate smerf usermodelname
 
 Replace UserModelName with the model you use for storing details about your 
 applications users, for example
 
     ./script/generate smerf user
+
+Please note the model name needs to be specified in lowercase.
 
 == Configuration
 
