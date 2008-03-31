@@ -58,97 +58,35 @@
 #
 
 class SmerfQuestion < SmerfItem
-  attr_accessor :code, :type, :question, :sort_order, :help, :textbox_size, :answer_objects 
-  attr_accessor :textfield_size, :header, :validation, :selectionbox_multiplechoice 
-    
-  # Array to hold codes for all items for this class, we use this to check for
-  # duplicates, for example duplicate question codes as question codes must be 
-  # unique for the complete form
-  #
-  @@class_code_array = Array.new
-
-  # Clear all class variables
-  #
-  def SmerfQuestion.clear
-    @@class_code_array.clear() 
-  end  
+  attr_accessor :code, :type, :question, :sort_order, :help, :textbox_size
+  attr_accessor :textfield_size, :header, :validation, :selectionbox_multiplechoice    
   
-  # Class constructor
-  #
-  def initialize(item, sort_order_field, owner_ident)
-    # Call the base class constructor with required params
-    super(item, sort_order_field, @@class_code_array, owner_ident)    
-    # We want to make sure answer codes are unique on a 
-    # question by question basis. This class manages answers
-    # to the question so we set the flag value here.
-    self.code_unique_for_smerf = false
-  end
-  
-  # This method performs the bulk of the processing. It processes the question
-  # definition making sure that all mandatory fields have values. If any 
-  # answers are found they will be processed and validated. 
-  # 
-  # As it processes the data it also performs validation on the data to make 
-  # sure all required fields have been specified in the definition file. 
-  # If any errors are found a <em>RuntimeError</em> exception will be raised.
-  #
-  def validate
-    # Decode the raw data
-    decode_data()
-    # Validate all fields present
-    errors = validate_object_fields()
-    # Process answers for this question
-    @answer_objects = nil
-    if (!@answers.nil? and !@answers.empty?)
-      # Process and validate answers 
-      @answer_objects = Array.new
-      errors += validate_sub_objects(SmerfAnswer, 
-          @answers, "sort_order", @answer_objects)
-    end
+  alias :answers :child_items 
+ 
+  def initialize(parent_id, sort_order_field)
+    super(parent_id, sort_order_field)
     
-    # Clear data no longer required, this will reduce the amount of data 
-    # saved to the DB
-    cleanup()
-    remove_instance_variable(:@answers) 
-
-    return errors
-  end
+    @fields = {
+      'code'                        => {'mandatory' => 'Y'},
+      'type'                        => {'mandatory' => 'Y', 'field_method' => 'check_question_type'},
+      'question'                    => {'mandatory' => 'N'},
+      'sort_order'                  => {'mandatory' => 'Y'},
+      'help'                        => {'mandatory' => 'N'},
+      'answers'                     => {'mandatory' => 'N', 'child_items' => 'SmerfAnswer', 'sort_by' => 'sort_order', 'unique_code_check' => 'parent'},
+      'textbox_size'                => {'mandatory' => 'N'},
+      'textfield_size'              => {'mandatory' => 'N'},
+      'header'                      => {'mandatory' => 'N'},
+      'selectionbox_multiplechoice' => {'mandatory' => 'N'},
+      'validation'                  => {'mandatory' => 'N'},
+    }
+  end    
     
   protected
-
-    # Check if there are validations that need to be performed for this questions
-    # if so add it to an array for easy verification later
-    def validation_function
-      object_validations << self if (!self.validation.blank?())        
-      return ""
-    end 
-    
-  private
-  
-    # These fields should match the fields in the form definition file as well
-    # as the names of the attr_accessor's
-    #
-    def setup_fields      
-      @fields = {
-        'code'                        => {'mandatory' => 'Y'},
-        'type'                        => {'mandatory' => 'Y', 'validate_function' => 'check_question_type'},
-        'question'                    => {'mandatory' => 'N'},
-        'sort_order'                  => {'mandatory' => 'Y'},
-        'help'                        => {'mandatory' => 'N'},
-        'answers'                     => {'mandatory' => 'N'},
-        'textbox_size'                => {'mandatory' => 'N'},
-        'textfield_size'              => {'mandatory' => 'N'},
-        'header'                      => {'mandatory' => 'N'},
-        'selectionbox_multiplechoice' => {'mandatory' => 'N'},
-        'validation'                  => {'mandatory' => 'N', 'validate_function' => 'validation_function'},
-      }
-    end
     
     # Additional validation method to make sure a valid question type
     # has been used
     #
     def check_question_type
-      error = ""
       case @type
       when 'multiplechoice'
       when 'textbox'
@@ -156,21 +94,9 @@ class SmerfQuestion < SmerfItem
       when 'textfield'
       when 'selectionbox'
       else
-        error = "Invalid question type #{@type} specified for " + object_id_message() + "\n"
+        msg = "Invalid question type #{@type} specified"
+        msg = msg + " for #{@data_id}" if (!@data_id.blank?)
+        @form_object.error(self.class, msg)
       end
-      return error
     end
-
-    def object_id_message
-      return "question #{@item_tag unless @item_tag.blank?}"
-    end
-
-    # Reload class variables after the form is unserialized from the DB
-    #
-    def init_object_class_variables
-      # Process form answers within this question
-      @answer_objects.each {|answer_object| answer_object.init_class_variables()} if (@answer_objects)
-      # Add any validation function defined for this question
-      validation_function()
-    end 
 end

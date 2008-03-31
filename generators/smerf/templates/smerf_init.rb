@@ -25,4 +25,5 @@ require "#{model_path}/smerf_file"
 require "#{model_path}/smerf_group"
 require "#{model_path}/smerf_question"
 require "#{model_path}/smerf_answer"
+require "#{model_path}/smerf_meta_form"
 

@@ -102,12 +102,12 @@ module SmerfSystemHelpers
     
   # This method will find the object with the specified object ident
   #
-  def smerf_get_object(object_ident, form)    
-    if (form.object_index.has_key?(object_ident) and
-      form.object_index[object_ident])
-      return form.object_index[object_ident]
+  def smerf_get_object(item_id, form)    
+    if (form.item_index.has_key?(item_id) and
+      form.item_index[item_id])
+      return form.item_index[item_id]
     else
-      raise(RuntimeError, "Object with object_ident(#{object_ident}) not found or nil")
+      raise(RuntimeError, "Object with item_id(#{item_id}) not found or nil")
     end
   end   
     
@@ -115,9 +115,9 @@ module SmerfSystemHelpers
   # in as a parameter
   #
   def smerf_get_owner_object(object, form)    
-    if (form.object_index.has_key?(object.owner_ident) and
-      form.object_index[object.owner_ident])
-      return form.object_index[object.owner_ident]
+    if (form.item_index.has_key?(object.parent_id) and
+      form.item_index[object.parent_id])
+      return form.item_index[object.parent_id]
     else
       raise(RuntimeError, "Owner object not found or nil")
     end

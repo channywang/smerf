@@ -67,14 +67,15 @@ class SmerfForm < ActiveRecord::Base
   # are different the form definition will be reprocessed.
   #
   def rebuild_cache(code)  
+    return if (!self.code.blank?() and !SmerfFile.modified?(code, self.cache_date))        
     # First clear the current cache
     self.cache = nil ; self.save if (!code.blank?)
     self.cache = Hash.new
     # Build the form and save to cache
-    smerffile = SmerfFile.new(code)
-    smerffile.validate()
-    self.cache[:smerfform] = smerffile
-    self.cache_date = File.mtime(smerffile.smerf_file_name).utc
+    smerffile = SmerfFile.new
+    smerfmetaform = smerffile.process(code)
+    self.cache[:smerfform] = smerfmetaform
+    self.cache_date = File.mtime(SmerfFile.smerf_file_name(code)).utc
     if (self.code.blank?())
       # Set code
       self.code = code
@@ -82,7 +83,7 @@ class SmerfForm < ActiveRecord::Base
       self.active = 1
     end  
     # Assign the name as it may have changed
-    self.name = self.cache[:smerfform].name
+    self.name = smerfmetaform.name
     # Save the changes
     self.save!()
   end 
@@ -100,9 +101,6 @@ class SmerfForm < ActiveRecord::Base
   def cache
     # Unserialize the data
     cache = unserialize_attribute('cache')
-    # Initialize class variables
-    cache[:smerfform].init_class_variables() if (cache and 
-      cache[:smerfform] and cache[:smerfform].object_index.length() <= 0)
     self[:cache] = cache
   end
   
@@ -180,30 +178,36 @@ class SmerfForm < ActiveRecord::Base
   def validate_responses(responses, errors)
     # Perform all validations by calling the validation helper methods
     # defined in the SmerfHelpers module 
-    self.form().object_validations.each do |object_validation|
-      if (!object_validation.validation.blank?())
-        # Multiple validation functions can be specified by using a comma
-        # between each function
-        validation_functions = object_validation.validation.split(",")
-        validation_functions.each do |validation_function|
-          if (self.respond_to?(validation_function.strip()))
-            # Call the method
-            error_msg = self.send(validation_function.strip(),
-              object_validation, responses, self.form())
-            add_error(errors, error_msg, object_validation) if (!error_msg.blank?())
-          end                      
-        end
-      end
-    end
+    call_validations(self.form, responses, errors)
   end
     
   private
   
-    def add_error(errors, msg, question)
-      errors[question.object_ident] = Hash.new if (errors[question.object_ident].nil?())
-      errors[question.object_ident]["msg"] = Array.new if (errors[question.object_ident]["msg"].nil?())
-      errors[question.object_ident]["msg"] << msg
-      errors[question.object_ident]["question"] = question.question
+    def call_validations(object, responses, errors)
+      object.child_items.each do |item|
+        if (item.respond_to?('validation') and !item.send('validation').blank?)
+          # Multiple validation functions can be specified by using a comma
+          # between each function
+          validation_functions = item.validation.split(",")
+          validation_functions.each do |validation_function|
+            if (self.respond_to?(validation_function.strip()))
+              # Call the method
+              error_msg = self.send(validation_function.strip(),
+                item, responses, self.form)
+              add_error(errors, error_msg, item) if (!error_msg.blank?())
+            end                      
+          end
+        end
+        # Recursivly call this method to navigate all items on the form
+        call_validations(item, responses, errors)        
+      end
+    end
+  
+    def add_error(errors, msg, item)
+      errors[item.item_id] = Hash.new if (errors[item.item_id].nil?())
+      errors[item.item_id]["msg"] = Array.new if (errors[item.item_id]["msg"].nil?())
+      errors[item.item_id]["msg"] << msg
+      errors[item.item_id]["question"] = item.question
     end
     
 end

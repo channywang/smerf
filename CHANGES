@@ -1,9 +1,12 @@
-== Version 0.0.5
+== Version 0.1.0
 Bug Fixes.
 
 * Modify generator to convert model name to lowercase
 * Fix minor bug in smerf_forms_user template, additional 's' was being added to a variable name 
 * Include smerf_responses.rb in generated files as content on file depends on specified user model
+* Re-write all smerf form processing classes. This was done to prevent the use of class variables
+  which caused all sorts of problems. Also the classes are much simpler and cleaner which will 
+  make it easier to understand.
 
 == Version 0.0.4
 Bug Fix.

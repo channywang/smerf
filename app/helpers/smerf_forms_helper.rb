@@ -51,8 +51,8 @@ module SmerfFormsHelper
   # CSS identifier: <tt>h2</tt>
   #
   def smerf_title
-    if !@smerfform.form().name.blank?
-      content_tag(:h2, @smerfform.form().name)
+    if !@smerfform.form.name.blank?
+      content_tag(:h2, @smerfform.form.name)
     end
   end
   
@@ -61,8 +61,8 @@ module SmerfFormsHelper
   # CSS identifier: <tt>formWelcome</tt>
   #
   def smerf_welcome
-    if !@smerfform.form().welcome.blank?
-      content_tag(:div, content_tag(:p, @smerfform.form().welcome), :class => "smerfWelcome")
+    if !@smerfform.form.welcome.blank?
+      content_tag(:div, content_tag(:p, @smerfform.form.welcome), :class => "smerfWelcome")
     end
   end
   
@@ -71,8 +71,8 @@ module SmerfFormsHelper
   # CSS identifier: <tt>smerfThankyou</tt>
   #
   def smerf_thank_you
-    if !@smerfform.form().thank_you.blank?
-      content_tag(:div, content_tag(:p, @smerfform.form().thank_you), :class => "smerfThankyou")
+    if !@smerfform.form.thank_you.blank?
+      content_tag(:div, content_tag(:p, @smerfform.form.thank_you), :class => "smerfThankyou")
     end
   end
   
@@ -101,14 +101,14 @@ module SmerfFormsHelper
   # This method retrieves all the groups defined in the form.
   # 
   def smerf_get_groups
-    @smerfform.form().group_objects
+    @smerfform.form.groups
   end
  
   # This method retrieves all the questions defined for the group
   # passed in as a parameter.
   # 
   def smerf_get_group_questions(group)
-    group.question_objects 
+    group.questions 
   end
   
   # This method formats the question, and any answers and subquestions
@@ -141,8 +141,8 @@ module SmerfFormsHelper
       :class => (level <= 1) ? "smerfQuestion" : "smerfSubquestion") if (question.question and !question.question.blank?) 
     # Format error
     contents += content_tag(:div, 
-      content_tag(:p, "#{image_tag("smerf_error.gif", :alt => "Error")} #{@errors["#{question.object_ident}"]["msg"]}"), 
-      :class => "smerfQuestionError") if (@errors and @errors.has_key?("#{question.object_ident}"))    
+      content_tag(:p, "#{image_tag("smerf_error.gif", :alt => "Error")} #{@errors["#{question.item_id}"]["msg"]}"), 
+      :class => "smerfQuestionError") if (@errors and @errors.has_key?("#{question.item_id}"))    
     # Format help   
     contents += content_tag(:div, 
       content_tag(:p, "#{image_tag("smerf_help.gif", :alt => "Help")} #{question.help}"), 
@@ -177,9 +177,9 @@ module SmerfFormsHelper
     def process_sub_questions(answer, level)
       # Process any answer sub quesions by recursivly calling this function
       sq_contents = ""
-      if (answer.respond_to?("subquestion_objects") and 
-        answer.subquestion_objects and answer.subquestion_objects.size > 0)
-        answer.subquestion_objects.each {|subquestion| sq_contents += 
+      if (answer.respond_to?("subquestions") and 
+        answer.subquestions and answer.subquestions.size > 0)
+        answer.subquestions.each {|subquestion| sq_contents += 
           smerf_group_question(subquestion, level+1)}
         # Indent question
         sq_contents = "<div style=\"margin-left: #{level * 25}px;\">" + sq_contents + '</div>'       
@@ -191,7 +191,7 @@ module SmerfFormsHelper
     #
     def get_multiplechoice(question, level)
       contents = ""
-      question.answer_objects.each do |answer|
+      question.answers.each do |answer|
         # Get the user input if available
         user_answer = nil
         if (@responses and !@responses.empty?() and 
@@ -265,8 +265,8 @@ module SmerfFormsHelper
     #
     def get_singlechoice(question, level)
       contents = ""
-      question.answer_objects.each do |answer|
-        # Get the user input if available
+      question.answers.each do |answer|
+        # Get the user input_objects if available
         user_answer = nil
         if (@responses and !@responses.empty?() and 
           @responses.has_key?("#{question.code}"))
@@ -296,7 +296,7 @@ module SmerfFormsHelper
       # Note: This question type can not have subquestions      
       contents = ""
       answers = "\n"
-      question.answer_objects.each do |answer|
+      question.answers.each do |answer|
         # Get the user input if available
         user_answer = nil
         if (@responses and !@responses.empty?() and 
@@ -334,26 +334,26 @@ module SmerfFormsHelper
     # try and find the question this object belongs to and display the question
     # text in the error message
     #
-    def find_question_text(object_ident)
+    def find_question_text(item_id)
       text = ""
       
       # Retrieve the object with the supplied ident         
-      smerf_object = smerf_get_object(object_ident, @smerfform.form())
+      smerf_object = smerf_get_object(item_id, @smerfform.form)
       
       # Check if  we have reached the root level, if so return
       # an empty string
-      return text if (smerf_object.owner_ident == @smerfform.code)
+      return text if (smerf_object.parent_id == @smerfform.code)
 
       # Retrieve the owner object and see if it is a question, if not
       # we move up the object tree until a question is found with 
       # question text or we reach the root level
-      smerf_owner_object = smerf_get_owner_object(smerf_object, @smerfform.form())      
+      smerf_owner_object = smerf_get_owner_object(smerf_object, @smerfform.form)      
       if (!smerf_owner_object.is_a?(SmerfQuestion) or
         smerf_owner_object.question.blank?())
         # Not a question, or no text for this question, recursivly call this function
         # moving up the tree until we reach the root level or a question with text
         # is found
-        text = find_question_text(smerf_owner_object.object_ident)
+        text = find_question_text(smerf_owner_object.item_id)
       else
         text = smerf_owner_object.question
       end
