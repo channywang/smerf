@@ -46,7 +46,7 @@ Simply change the line
 
 and set smerf_user_id to an existing user record id.
 
-Then display the SMERF test form by doing something similar to this
+To display the SMERF test form by doing something similar to this
 
 http://localhost:3000/smerf_test
 
