@@ -8,6 +8,8 @@
 #
 
 class SmerfFormsController < ApplicationController
+  
+  include Smerf
 
   # GET /smerf_forms/smerf_form_file_name
   # 
@@ -61,7 +63,7 @@ class SmerfFormsController < ApplicationController
       if (@errors.empty?()) 
         # Create the record 
         <%= link_table_model_class_name %>.create_records(
-          @smerfform.id, SmerfForm.smerf_user_id, @responses)
+          @smerfform.id, self.smerf_user_id, @responses)
         flash[:notice] = "#{@smerfform.name} saved successfully"
         # Show the form again, allowing the user to edit responses
         render(:action => "edit")
@@ -88,7 +90,7 @@ class SmerfFormsController < ApplicationController
       # Update responses if no errors
       if (@errors.empty?()) 
         <%= link_table_model_class_name %>.update_records(
-          @smerfform.id, SmerfForm.smerf_user_id, @responses)
+          @smerfform.id, self.smerf_user_id, @responses)
         flash[:notice] = "#{@smerfform.name} updated successfully"   
       end
       # Show the form again, allowing the user to edit responses
@@ -119,7 +121,7 @@ private
     end
     # Find the smerf form record for the current user
     @<%= link_table_model_name %> = <%= link_table_model_class_name %>.find_user_smerf_form(
-      SmerfForm.smerf_user_id, @smerfform.id)
+      self.smerf_user_id, @smerfform.id)
   end
   
   # This method will validate the users responses.

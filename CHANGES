@@ -7,6 +7,13 @@ Bug Fixes.
 * Re-write all smerf form processing classes. This was done to prevent the use of class variables
   which caused all sorts of problems. Also the classes are much simpler and cleaner which will 
   make it easier to understand.
+* Remove the use of a class variable to store the smerf_user_id as this may have caused
+  results for one user to be stored against the user that last logged into the system. Instead
+  of using SmerfForm.smerf_user_id to set the id of the user record you now need to do:
+    self.smerf_user_id = ...
+  You will also need to include the Smerf module in the controller where SMERF is to be used or
+  in the application.rb if you want to use it for all controllers, i.e.
+    include Smerf
 
 == Version 0.0.4
 Bug Fix.

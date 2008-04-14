@@ -61,6 +61,8 @@ class SmerfQuestion < SmerfItem
   attr_accessor :code, :type, :question, :sort_order, :help, :textbox_size
   attr_accessor :textfield_size, :header, :validation, :selectionbox_multiplechoice    
   
+  # A question object maintains any number of answers, here we alias the 
+  # variable that stores the child objects to make code more readable
   alias :answers :child_items 
  
   def initialize(parent_id, sort_order_field)

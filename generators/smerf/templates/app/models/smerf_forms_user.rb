@@ -27,7 +27,7 @@ class <%= link_table_model_class_name %> < ActiveRecord::Base
       raise(RuntimeError, 
         "For the form responses to be saved for a user, a record ID for 
         the user table needs to be specified. This can be set by using 
-        setter function SmerfForm.smerf_user_id, e.g. SmerfForm.smerf_user_id = 1")
+        setter function self.smerf_user_id, e.g. self.smerf_user_id = 1")
     end 
     
     return <%= link_table_model_name %>

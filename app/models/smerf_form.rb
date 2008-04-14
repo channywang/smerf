@@ -13,10 +13,6 @@ class SmerfForm < ActiveRecord::Base
   include SmerfSystemHelpers
   include SmerfHelpers
   
-  # Class variable to hold the record ID of the current user so that we
-  # can save the users responses to the DB
-  @@smerf_user_id = -1
-  
   has_many :users, :through => :smerf_forms_users
   validates_presence_of :name, :code, :active
   validates_length_of :name, :allow_nil => false, :maximum => 50
@@ -35,9 +31,6 @@ class SmerfForm < ActiveRecord::Base
   # which are initialized at run time (see below)
   #  
   serialize :cache  
-  
-  # Define function that will allow access to class variable
-  cattr_accessor :smerf_user_id  
   
   @unserialized_cache = nil
     

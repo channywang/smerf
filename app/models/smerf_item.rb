@@ -3,7 +3,7 @@
 # 
 # Derived classes include:
 # 
-# * SmerfFile
+# * SmerfMetaForm
 # * SmerfGroup
 # * SmerfQuestion
 # * SmerfAnswer
@@ -16,7 +16,8 @@ class SmerfItem
   def initialize(parent_id='', sort_order_field='')
     
     # Item id of the owner of this item
-    @parent_id = parent_id    
+    @parent_id = parent_id
+    # Init this items id
     @item_id = ''
     # Name of the field used for sorting this item
     @sort_order_field = sort_order_field

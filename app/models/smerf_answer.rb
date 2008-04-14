@@ -32,6 +32,8 @@
 class SmerfAnswer < SmerfItem
   attr_accessor :code, :answer, :default, :sort_order 
   
+  # A answer object maintains any number of sub-questions, here we alias the 
+  # variable that stores the child objects to make code more readable
   alias :subquestions :child_items 
  
   def initialize(parent_id, sort_order_field)

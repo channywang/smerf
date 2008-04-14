@@ -11,44 +11,6 @@
 # within this class to rebuild the form objects. Refer to the rebuild_cache method 
 # within the smerfform.rb file to see how this all works.
 #
-# When setting up a new form the first thing we do is define some settings for 
-# the form as a whole. Currently the following items can be defined for the form:
-#
-# name:: Name of the form (mandatory) 
-# welcome:: Message displayed at the start of the form (optional) 
-# thank_you:: Message displayed at the end of the form (optional) 
-# group_sort_order_field:: Nominates which group field to use when sorting groups 
-#                          for display (mandatory) 
-# groups:: Defines the question groups within the form (mandatory) 
-#
-# Here is the definition for the test form included with the plugin:
-#
-#    --- 
-#    smerfform:   
-#      name: Test SMERF Form
-#      welcome: | 
-#        <b>Welcome:</b><br>
-#        Thank you for taking part in our Test survey we appreciate your
-#        input.<br><br>
-#
-#        <b>PRIVACY STATEMENT</b><br>
-#        We will keep all the information you provide private and not share
-#        it with anyone else....<br>
-#
-#      thank_you: | 
-#        <b>Thank you for your input.</b><br><br>
-#
-#        Should you wish to discuss this survey please contact<br>
-#        Joe Bloggs<br>
-#        Tel. 12 345 678<br>
-#        e-mail <A HREF=\"mailto:jbloggs@xyz.com.au\">Joe's email</A><br><br>
-#
-#        February 2007
-#      group_sort_order_field: code
-#
-#      groups:
-#      ...
-#
 
 class SmerfFile
   

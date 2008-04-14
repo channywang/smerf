@@ -1,15 +1,4 @@
-# This class contains functions to work with the smerf form definition file. It
-# will read the file validating the format of the file, if any errors are 
-# found a <em>RuntimeError</em> exception will be raised.
-# 
-# Once the file has been validated all objects created during the process
-# will be serialized to the smerf_forms DB table. Subsequent calls to the form
-# will simplay unserialize the objects from the DB rather then reporcessing 
-# the definition file.
-# 
-# If changes are made to the definition file the system will again call functions
-# within this class to rebuild the form objects. Refer to the rebuild_cache method 
-# within the smerfform.rb file to see how this all works.
+# This class contains details about the form, it derives from SmerfItem.
 #
 # When setting up a new form the first thing we do is define some settings for 
 # the form as a whole. Currently the following items can be defined for the form:
@@ -58,6 +47,8 @@ class SmerfMetaForm < SmerfItem
   # allows us to easily find objects using the item id
   attr_accessor :item_index
   
+  # The form object maintains question groups, here we alias the 
+  # variable that stores the child objects to make code more readable
   alias :groups :child_items 
   
   # Error hash
@@ -118,7 +109,5 @@ class SmerfMetaForm < SmerfItem
     end
     return true    
   end   
-  
-  private
   
 end

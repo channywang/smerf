@@ -24,6 +24,8 @@
 class SmerfGroup < SmerfItem
   attr_accessor :code, :name, :description
   
+  # A group object maintains any number of questions, here we alias the 
+  # variable that stores the child objects to make code more readable
   alias :questions :child_items 
   
   def initialize(parent_id, sort_order_field)

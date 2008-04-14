@@ -23,7 +23,7 @@
 # Multiple validation methods can be specified by comma separating each method name.                            
 #
 
-module SmerfSystemHelpers
+module SmerfSystemHelpers  
 
   # This method checks to make sure that mandatory questions
   # have been answered by the user
