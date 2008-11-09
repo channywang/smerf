@@ -13,7 +13,7 @@ model_path = ''
   # be found. I also had to do this to allow the application layout to be used, without
   # this no layout would be used at all. We place the plugin view directory at the end
   # of the array so that the application view will be checked first.
-  ActionController::Base.view_paths << file_path if file_path.include?('views')
+  ActionController::Base.append_view_path file_path if file_path.include?('views')
   model_path = file_path if file_path.include?('models') 
 end
 
