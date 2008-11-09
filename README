@@ -1,15 +1,15 @@
-= Simple MEta Rails Form (SMERF)
+SMERF = Simple MEta Rails Form (SMERF)
 
 SMERF is a Ruby on Rails plugin that allows you to easily define dynamic  
 forms which you can use for surveys, questionnaires, and data collection  
-forms for example. It records which forms a user have completed and saves
-the users responses so that they can easily be analysed via SQL.
+forms. It records which forms a user has completed and saves the user's 
+responses so that they can easily be analyzed via SQL.
 
 == Requirements
 
-1. You need to have a table that stores details about the users of your
-   application. SMERF will keep track of the forms a user completes as
-   well as the users responses to questions on these forms.
+1. Some sort of User model. You need a table that stores details about 
+   the users of your application. SMERF will keep track of the forms a 
+   user completes as well as the users responses to questions on these forms.
 2. The name of this users table as well as the primary key and model needs
    to conform to the Rails convention, i.e.     
     - DB table name needs to be plural, e.g. users
@@ -18,47 +18,47 @@ the users responses so that they can easily be analysed via SQL.
 3. SMERF is a RESTful plugin
 4. It has only been tested with Rails V2
 
-== Download
+== Download options
 
-=== Direct Download
-    Get it from RubyForge at http://rubyforge.org/frs/?group_id=5260
+=== Direct Download from RubyForge 
+	http://rubyforge.org/frs/?group_id=5260
 
 === Using Rails Plugin Installer
-    ruby script/plugin install http://smerf.rubyforge.org/svn/stable/smerf
+    ./script/plugin install git://github.com/etandrib/smerf.git
+	(outdated SVN repository) ruby script/plugin install http://smerf.rubyforge.org/svn/stable/smerf
+
 
 == Installation
 
-The plugin is easy to install, once you have downloaded the source code run 
-the following command from the root directory of your Rails application
+1. Download plugin (see above)
 
-    ./script/generate smerf usermodelname
+2. Run the following command from the root directory of your Rails application
+   where "user" is the name of your user model. The model name needs to be lowercase.
+	./script/generate smerf user
 
-Replace UserModelName with the model you use for storing details about your 
-applications users, for example
-
-    ./script/generate smerf user
-
-Please note the model name needs to be specified in lowercase.
 
 == Configuration
 
 1. Run the DB migration    
     rake db:migrate
-2. Include smerf in the controller where it will be used, if you want all 
-   controllers to have access add it to the application.rb, e.g.
+
+2. Include smerf in the controller where it will be used, or if you want all 
+   controllers to have access add it to the application.rb controller, e.g.
     include Smerf
+
 3. Set the record ID of the current user so that SMERF can save responses 
-   for each user. This can normally be done once the user has been authenticated 
-   by using the following code as an example:
+   for each user. Place the following example code in the sessions_controller.rb
+   where the user is authenticated.
     self.smerf_user_id = current_user.id
+
 4. You can use the example stylesheet(smerf.css) supplied with the plugin 
    which was copied to the /public/stylesheets directory by adding it to your 
    application layout, e.g.
     <%= stylesheet_link_tag "smerf", :cache => true  %>
-5. To create a link to display a form you can use the Standard REST Path 
-   method used for the show action passing the name of the form definition file
-   as a parameter, for example
-    link_to('Complete Test Smerf Form', smerf_url('testsmerf'))
+
+5. Link to a form by passing the name of the form definition file as a parameter.
+    <%= link_to('SMERF Test Form', smerf_url('testsmerf')) %>
+
 
 == Testing your installation
 
@@ -72,11 +72,14 @@ Simply change the line
 and set smerf_user_id to an existing user record id.
 
 To display the SMERF test form by doing something similar to this
-    http://localhost:3000/smerf_test
+    http://localhost:3000/smerf_forms/testsmerf
+    http://appname.local/smerf_forms/testsmerf  (Passenger users)
+
 
 == License
 SMERF is Copyright(c) 2008 Etienne van Tonder, Cascadia Software Pty Ltd,
 released under the MIT license
+
 
 == Support
 The SMERF homepage is http://smerf.cascadia.com.au and the project is hosted on  
@@ -94,14 +97,14 @@ Also feel free to contact me by sending an email to smerf@cascadia.com.au
    http://workingwithrails.com/recommendation/new/person/10053-etienne-van-tonder
 
 2. That you consider freely sharing any changes that you make to the plugin. 
-   Also that you share any new functionality that you creare for use with the 
+   Also that you share any new functionality that you create for use with the 
    plugin that you consider may be useful to other users.
 
 == Usage
 The SMERF form definition file allows you to define the contents of a form. 
 Each form is made up of groups and within each group there are any number of 
 questions which can accept free form text as the answer or presents a list of 
-possibilties to the user. 
+possibilities to the user. 
 
 In some cases an answer may ask for additional information by asking another
 questions, these can be defined using the subquestion field when defining the 

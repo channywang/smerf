@@ -8,7 +8,7 @@ class SmerfTestController < ApplicationController
     # normally this would be done by the authentication code
     # for the application, the test app does not use authentication
     # so we set it here as an example
-    self.smerf_user_id = 1
+    self.smerf_user_id = 1 # possible to just call the first user.id?
     
   end
   
